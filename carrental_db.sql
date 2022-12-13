@@ -100,7 +100,7 @@ CREATE TABLE `tblbooking` (
 
 INSERT INTO `tblbooking` (`id`, `BookingNumber`, `userEmail`, `VehicleId`, `FromDate`, `ToDate`, `message`, `Status`, `PostingDate`, `LastUpdationDate`) VALUES
 (1, 123456789, 'test@gmail.com', 1, '2020-07-07', '2020-07-09', 'What  is the cost?', 1, '2020-07-07 14:03:09', NULL),
-(2, 987456321, 'test@gmail.com', 4, '2020-07-19', '2020-07-24', 'hfghg', 1, '2020-07-09 17:49:21', '2021-01-16 20:09:42'),
+(2, 987456321, 'tes123t@gmail.com', 4, '2020-07-19', '2020-07-24', 'hfghg', 1, '2020-07-09 17:49:21', '2021-01-16 20:09:42'),
 (4, 903014017, 'gerald@gmail.com', 8, '2021-01-16', '2021-01-21', 'service it very well', 0, '2021-01-16 20:16:13', NULL),
 (5, 901268746, 'gerald@gmail.com', 2, '2021-02-16', '2021-02-18', 'good conditions', 2, '2021-02-15 08:14:05', '2021-06-14 03:23:13'),
 (6, 958065939, 'john@gmail.com', 6, '2021-07-26', '2021-07-28', 'I need that car when it is well serviced', 1, '2021-07-26 07:05:08', '2021-07-26 07:23:02'),
