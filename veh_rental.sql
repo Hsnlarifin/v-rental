@@ -312,7 +312,7 @@ ALTER TABLE `user`
 -- Indexes for table `vehicle`
 --
 ALTER TABLE `vehicle`
-  ADD PRIMARY KEY (`veh_ID`)
+  ADD PRIMARY KEY (`veh_ID`),
   ADD KEY `fk_supp_ID` (`supp_ID`),
   ADD KEY `fk3_branch_ID` (`branch_ID`);
 
@@ -395,13 +395,11 @@ ALTER TABLE `vehicle`
   MODIFY `veh_ID` int(10) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `workshop`
+-- AUTO_INCREMENT for table `maintenance`
 --
-ALTER TABLE `workshop`
-  MODIFY `wshop_ID` int(10) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `maintenance`
+  MODIFY `maintenance_ID` int(10) NOT NULL AUTO_INCREMENT;
 
-
-------------------------------------------------------------------------
 --
 -- Constraints for dumped tables
 --
@@ -434,10 +432,11 @@ ALTER TABLE `insurance`
 --
 -- Constraints for table `vehicle_Status`
 --
+/*
 ALTER TABLE `Vehice_Status`
   ADD CONSTRAINT `fk_veh_ID` FOREIGN KEY (`veh_ID`) REFERENCES `vehicle` (`veh_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_maintenance_ID` FOREIGN KEY (`maintenance_ID`) REFERENCES `maintenance` (`maintenance_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
-
+*/
 --
 -- Constraints for table `payment`
 --
