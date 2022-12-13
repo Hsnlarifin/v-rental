@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 
-CREATE DATABASE veh_rental;
+
 --
 -- Database: `veh_rental`
 --
@@ -101,7 +101,7 @@ CREATE TABLE `location` (
 
 CREATE TABLE `vehicle_status` (
   `veh_ID` int(10) NOT NULL,
-  `wshop_ID` int(10) NOT NULL,
+  `maintenance_ID` int(10) NOT NULL,
   `status` varchar(100) COLLATE utf8mb4_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
