@@ -17,6 +17,8 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
+
+CREATE DATABASE veh_rental;
 --
 -- Database: `veh_rental`
 --
@@ -326,7 +328,7 @@ ALTER TABLE `vehicle_details`
 -- Indexes for table `maintenance`
 --
 ALTER TABLE `maintenance`
-  ADD PRIMARY KEY (`maintenance_ID`),
+  ADD PRIMARY KEY (`maintenance_ID`);
 
 --
 -- AUTO_INCREMENT for dumped tables
