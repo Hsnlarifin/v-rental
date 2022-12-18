@@ -38,7 +38,10 @@ $contactno=$result->ContactNo;
 <?php }
 else{ 
 
-echo "Welcome To Car rental portal";
+
+echo ""; 
+
+
  } ?>
           </div>
         </div>
@@ -55,8 +58,10 @@ echo "Welcome To Car rental portal";
       <div class="header_wrap">
         <div class="user_login">
           <ul>
+            
             <li class="dropdown"> <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-circle" aria-hidden="true"></i> 
 <?php 
+
 $email=$_SESSION['login'];
 $sql ="SELECT FullName FROM tblusers WHERE EmailId=:email ";
 $query= $dbh -> prepare($sql);
@@ -83,6 +88,8 @@ foreach($results as $result)
             </li>
           </ul>
         </div>
+
+        <!-- search bar
         <div class="header_search">
           <div id="search_toggle"><i class="fa fa-search" aria-hidden="true"></i></div>
           <form action="search.php" method="post" id="header-search-form">
@@ -90,6 +97,8 @@ foreach($results as $result)
             <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
           </form>
         </div>
+           -->
+           
       </div>
       <div class="collapse navbar-collapse" id="navigation">
         <ul class="nav navbar-nav">
