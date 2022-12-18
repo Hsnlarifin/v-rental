@@ -275,7 +275,7 @@ blockquote {
   font-size: 18px;
   line-height: 22px;
   margin: 0;
-  vertical-align: middle;
+  /*vertical-align: middle;*/
 }
 .btn.outline.active-btn {
 	border-color:#089901;
@@ -1905,7 +1905,7 @@ input.newsletter-input {
   height: 40px;
   line-height: 36px;
   text-align: center;
-  vertical-align: top;
+  /*vertical-align: top;*/
   width: 40px;
 }
 .back-top a:hover, .back-top a:focus {
@@ -3627,7 +3627,7 @@ table.info-tabel tr td {
 	16. Profile-page
 ================================*/
 .profile_page {
-	background-image:url(../images/profile-page-header-img.jpg);
+	background-image:url("../images/profile_page/baby_blue_background.png");
 }
 .inner_pages {
 	padding:80px 0;
@@ -4045,6 +4045,7 @@ table.info-tabel tr td {
 	font-weight:300;
 	font-size:18px;
 }
+/*
 .vs {
   border-radius: 50%;
   color: #ffffff;
@@ -4063,7 +4064,9 @@ table.info-tabel tr td {
     -o-transform:translateY(-50%);
      -webkit-transform:translateY(-50%);
      -md-transform:translateY(-50%)
+     
 } 
+*/
 .td_divider {
   display: block;
   height: 70%;
