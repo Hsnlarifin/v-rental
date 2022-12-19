@@ -105,9 +105,12 @@ foreach($results as $result)
 
 <!-- Fun Facts-->
 <section class="fun-facts-section">
+  <!--
   <div class="container div_zindex">
+    
     <div class="row">
       <div class="col-lg-3 col-xs-6 col-sm-3">
+        
         <div class="fun-facts-m">
           <div class="cell">
             <h2><i class="fa fa-calendar" aria-hidden="true"></i>40+</h2>
@@ -139,6 +142,7 @@ foreach($results as $result)
           </div>
         </div>
       </div>
+-->
     </div>
   </div>
   <!-- Dark Overlay-->

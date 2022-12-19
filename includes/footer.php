@@ -47,7 +47,7 @@ echo "<script>alert('Something went wrong. Please try again');</script>";
                <li><a href="admin/">Admin Login</a></li>
           </ul>
         </div>
-  
+  <!--
         <div class="col-md-3 col-sm-6">
           <h6>Subscribe Newsletter</h6>
           <div class="newsletter-form">
@@ -78,10 +78,13 @@ echo "<script>alert('Something went wrong. Please try again');</script>";
             </ul>
           </div>
         </div>
-        <div class="col-md-6 col-md-pull-6">
-          <p class="copy-right">Copyright &copy; 2020 Car Rental Portal. All Rights Reserved</p>
-        </div>
+-->
+        
+
       </div>
     </div>
+    <div class="col-md-6 col-md-pull-0">
+          <p class="copy-right">Copyright &copy; 2020 Car Rental Portal. All Rights Reserved</p>
+        </div>
   </div>
 </footer>
