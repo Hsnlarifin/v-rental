@@ -51,15 +51,17 @@ error_reporting(0);
     </div>
     <div class="row"> 
       
-      <!-- Nav tabs -->
+      <!-- Nav tabs 
       <div class="recent-tab">
         <ul class="nav nav-tabs" role="tablist">
-          <li role="presentation" class="active"><a href="#resentnewcar" role="tab" data-toggle="tab">New Car</a></li>
+          <li role="presentation" class="active"><a href="#resentnewcar" role="tab" data-toggle="tab"></a></li>
         </ul>
       </div>
+-->
       <!-- Recently Listed New Cars -->
       <div class="tab-content">
         <div role="tabpanel" class="tab-pane active" id="resentnewcar">
+
 
 <?php $sql = "SELECT tblvehicles.VehiclesTitle,tblbrands.BrandName,tblvehicles.PricePerDay,tblvehicles.FuelType,tblvehicles.ModelYear,tblvehicles.id,tblvehicles.SeatingCapacity,tblvehicles.VehiclesOverview,tblvehicles.Vimage1 from tblvehicles join tblbrands on tblbrands.id=tblvehicles.VehiclesBrand limit 9";
 $query = $dbh -> prepare($sql);
@@ -70,8 +72,9 @@ if($query->rowCount() > 0)
 {
 foreach($results as $result)
 {  
-?>  
+?> 
 
+<!--
 <div class="col-list-3">
 <div class="recent-car-list">
 <div class="car-info-box"> <a href="vehical-details.php?vhid=<?php echo htmlentities($result->id);?>"><img src="admin/img/vehicleimages/<?php echo htmlentities($result->Vimage1);?>" class="img-responsive" alt="image"></a>
@@ -90,6 +93,8 @@ foreach($results as $result)
 </div>
 </div>
 </div>
+-->
+
 <?php }}?>
        
       </div>
