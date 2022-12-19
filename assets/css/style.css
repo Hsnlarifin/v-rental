@@ -2267,11 +2267,13 @@ form .slider.slider-horizontal {
   padding: 0;
   position: relative;
 }
+/*
 .page-header_wrap {
-  padding:60px 0;
+  padding:40px 0;
   position:relative;	
-  text-align:center;
+  text-align:left;
 }
+*/
 .page-heading {
   z-index:1;
   position:relative;

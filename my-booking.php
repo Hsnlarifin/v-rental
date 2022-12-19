@@ -14,7 +14,7 @@ else{
 <title>V-Rental - My Reservation</title>
 <!--Bootstrap -->
 <link rel="stylesheet" href="assets/css/bootstrap.min.css" type="text/css">
-<!--Custome Style -->
+<!--Custom Style -->
 <link rel="stylesheet" href="assets/css/style.css" type="text/css">
 <!--OWL Carousel slider-->
 <link rel="stylesheet" href="assets/css/owl.carousel.css" type="text/css">
@@ -65,7 +65,7 @@ else{
 <!--Page Header-->
 <section class="page-header profile_page">
   <div class="container">
-    <div class="">
+    <div class="page-header_wrap">
       <div class="page-heading">
         <h1>My Reservation</h1>
       </div>
