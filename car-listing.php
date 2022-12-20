@@ -8,7 +8,7 @@ error_reporting(0);
 <html lang="en">
 <head>
 
-<title>Car Rental Portal | Car Listing</title>
+<title>V-Rental | Car Listing</title>
 <!--Bootstrap -->
 <link rel="stylesheet" href="assets/css/bootstrap.min.css" type="text/css">
 <!--Custome Style -->
@@ -37,14 +37,11 @@ error_reporting(0);
 <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/images/favicon-icon/apple-touch-icon-114-precomposed.html">
 <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/images/favicon-icon/apple-touch-icon-72-precomposed.png">
 <link rel="apple-touch-icon-precomposed" href="assets/images/favicon-icon/apple-touch-icon-57-precomposed.png">
-<link rel="shortcut icon" href="assets/images/favicon-icon/favicon.png">
+<link rel="shortcut icon" href="assets/images/tab_icon.png">
 <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
 </head>
 <body>
 
-<!-- Start Switcher -->
-<?php include('includes/colorswitcher.php');?>
-<!-- /Switcher -->  
 
 <!--Header--> 
 <?php include('includes/header.php');?>
@@ -53,7 +50,7 @@ error_reporting(0);
 <!--Page Header-->
 <section class="page-header listing_page">
   <div class="container">
-    <div class="page-header_wrap">
+    
       <div class="page-heading">
         <h1>Car Listing</h1>
       </div>
@@ -61,7 +58,7 @@ error_reporting(0);
         <li><a href="#">Home</a></li>
         <li>Car Listing</li>
       </ul>
-    </div>
+    
   </div>
   <!-- Dark Overlay-->
   <div class="dark-overlay"></div>
@@ -155,33 +152,7 @@ foreach($results as $result)
           </div>
         </div>
 
-        <div class="sidebar_widget">
-          <div class="widget_heading">
-            <h5><i class="fa fa-car" aria-hidden="true"></i> Recently Listed Cars</h5>
-          </div>
-          <div class="recent_addedcars">
-            <ul>
-<?php $sql = "SELECT tblvehicles.*,tblbrands.BrandName,tblbrands.id as bid  from tblvehicles join tblbrands on tblbrands.id=tblvehicles.VehiclesBrand order by id desc limit 4";
-$query = $dbh -> prepare($sql);
-$query->execute();
-$results=$query->fetchAll(PDO::FETCH_OBJ);
-$cnt=1;
-if($query->rowCount() > 0)
-{
-foreach($results as $result)
-{  ?>
-
-              <li class="gray-bg">
-                <div class="recent_post_img"> <a href="vehical-details.php?vhid=<?php echo htmlentities($result->id);?>"><img src="admin/img/vehicleimages/<?php echo htmlentities($result->Vimage1);?>" alt="image"></a> </div>
-                <div class="recent_post_title"> <a href="vehical-details.php?vhid=<?php echo htmlentities($result->id);?>"><?php echo htmlentities($result->BrandName);?> , <?php echo htmlentities($result->VehiclesTitle);?></a>
-                  <p class="widget_price">$<?php echo htmlentities($result->PricePerDay);?> Per Day</p>
-                </div>
-              </li>
-              <?php }} ?>
-              
-            </ul>
-          </div>
-        </div>
+        
       </aside>
       <!--/Side-Bar--> 
     </div>

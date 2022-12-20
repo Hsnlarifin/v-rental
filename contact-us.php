@@ -31,7 +31,7 @@ $error="Something went wrong. Please try again";
 <html lang="en">
 <head>
 
-<title>Car Rental|| Contact Us Page</title>
+<title>V-Rental | Contact Us </title>
 <!--Bootstrap -->
 <link rel="stylesheet" href="assets/css/bootstrap.min.css" type="text/css">
 <!--Custome Style -->
@@ -60,7 +60,7 @@ $error="Something went wrong. Please try again";
 <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/images/favicon-icon/apple-touch-icon-114-precomposed.html">
 <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/images/favicon-icon/apple-touch-icon-72-precomposed.png">
 <link rel="apple-touch-icon-precomposed" href="assets/images/favicon-icon/apple-touch-icon-57-precomposed.png">
-<link rel="shortcut icon" href="assets/images/favicon-icon/favicon.png">
+<link rel="shortcut icon" href="assets/images/tab_icon.png">
 <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
  <style>
     .errorWrap {
@@ -83,9 +83,7 @@ $error="Something went wrong. Please try again";
 </head>
 <body>
 
-<<!-- Start Switcher -->
-<?php include('includes/colorswitcher.php');?>
-<!-- /Switcher -->  
+
         
 <!--Header-->
 <?php include('includes/header.php');?>
@@ -94,7 +92,7 @@ $error="Something went wrong. Please try again";
 <!--Page Header-->
 <section class="page-header contactus_page">
   <div class="container">
-    <div class="page-header_wrap">
+    
       <div class="page-heading">
         <h1>Contact Us</h1>
       </div>
@@ -102,7 +100,7 @@ $error="Something went wrong. Please try again";
         <li><a href="#">Home</a></li>
         <li>Contact Us</li>
       </ul>
-    </div>
+    
   </div>
   <!-- Dark Overlay-->
   <div class="dark-overlay"></div>

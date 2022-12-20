@@ -1,4 +1,5 @@
 
+
 <header>
   <div class="default-header">
     <div class="container">
@@ -18,29 +19,13 @@ $email=$result->EmailId;
 $contactno=$result->ContactNo;
 }
 ?>  
-<!-- who to contact in Header
-            <div class="header_widgets">
-              <div class="circle_icon"> <i class="fa fa-envelope" aria-hidden="true"></i> </div>
-              <p class="uppercase_text">For Support Mail us : </p>
-              <a href="mailto:<?php echo htmlentities($email);?>"><?php echo htmlentities($email);?></a> </div>
-            <div class="header_widgets">
-              <div class="circle_icon"> <i class="fa fa-phone" aria-hidden="true"></i> </div>
-              <p class="uppercase_text">Service Helpline Call Us: </p>
-              <a href="tel:<?php echo htmlentities($contactno);?>"><?php echo htmlentities($contactno);?></a> </div>
-            <div class="social-follow">
-            
-            </div>
--->
-   <?php   if(strlen($_SESSION['login'])==0)
+
+<?php   if(strlen($_SESSION['login'])==0)
 	{	
 ?>
  <div class="login_btn"> <a href="#loginform" class="btn btn-s uppercase" data-toggle="modal" data-dismiss="modal">Login</a> </div>
 <?php }
 else{ 
-
-
-echo ""; 
-
 
  } ?>
           </div>
@@ -102,13 +87,11 @@ foreach($results as $result)
       </div>
       <div class="collapse navbar-collapse" id="navigation">
         <ul class="nav navbar-nav">
-          <li><a href="index.php">Home</a>    </li>
-          	 
+          <li><a href="index.php">Home</a>    </li>    	 
           <li><a href="page.php?type=aboutus">About</a></li>
           <li><a href="car-listing.php">Available Vehicles</a>
           <li><a href="page.php?type=faqs">Locations</a></li>
           <li><a href="contact-us.php">Contact Us</a></li>
-
         </ul>
       </div>
     </div>
