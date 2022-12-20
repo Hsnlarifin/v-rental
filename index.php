@@ -34,7 +34,6 @@ error_reporting(0);
 <?php include('includes/header.php');?>
 <!-- Header --> 
 
-
 <!-- Resent Cat-->
 <section class="section-padding gray-bg">
   <div class="container">
