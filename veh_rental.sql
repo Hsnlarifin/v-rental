@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 22, 2022 at 02:53 PM
+-- Generation Time: Dec 22, 2022 at 04:56 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -46,6 +46,7 @@ CREATE TABLE `customer` (
   `password` varchar(30) COLLATE utf8mb4_bin NOT NULL,
   `F_Name` varchar(50) COLLATE utf8mb4_bin DEFAULT NULL,
   `L_Name` varchar(50) COLLATE utf8mb4_bin DEFAULT NULL,
+  `PhoneNo` char(11) COLLATE utf8mb4_bin DEFAULT NULL,
   `street` varchar(100) COLLATE utf8mb4_bin DEFAULT NULL,
   `postcode` int(6) DEFAULT NULL,
   `city` varchar(100) COLLATE utf8mb4_bin DEFAULT NULL,
@@ -53,6 +54,15 @@ CREATE TABLE `customer` (
   `Regist_Date` timestamp NULL DEFAULT current_timestamp(),
   `Update_Date` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+--
+-- Dumping data for table `customer`
+--
+
+INSERT INTO `customer` (`cust_ID`, `cust_Username`, `password`, `F_Name`, `L_Name`, `PhoneNo`, `street`, `postcode`, `city`, `state`, `Regist_Date`, `Update_Date`) VALUES
+(2, 'hsnlar@gmail.com', 'e99a18c428cb38d5f260853678922e', 'Hasanul', 'Arifin', '01119733475', NULL, NULL, NULL, NULL, '2022-12-22 14:38:11', NULL),
+(3, 'test@gmail.com', 'abc123', 'Hasanul', 'Arifin', '01119733235', NULL, NULL, NULL, NULL, '2022-12-22 14:43:37', NULL),
+(4, 'test2@gmail.com', '5c428d8875d2948607f3e3fe134d71', 'abu', 'ali', '1234888', NULL, NULL, NULL, NULL, '2022-12-22 15:03:33', NULL);
 
 -- --------------------------------------------------------
 
@@ -305,7 +315,7 @@ ALTER TABLE `branch`
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `cust_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `cust_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `insurance`
