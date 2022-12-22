@@ -37,7 +37,7 @@ error_reporting(0);
 <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/images/favicon-icon/apple-touch-icon-114-precomposed.html">
 <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/images/favicon-icon/apple-touch-icon-72-precomposed.png">
 <link rel="apple-touch-icon-precomposed" href="assets/images/favicon-icon/apple-touch-icon-57-precomposed.png">
-<link rel="shortcut icon" href="assets/images/tab_icon.png">
+<link rel="shortcut icon" href="images/tab_icon.png">
 <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
 </head>
 <body>
@@ -60,8 +60,6 @@ error_reporting(0);
       </ul>
     
   </div>
-  <!-- Dark Overlay-->
-  <div class="dark-overlay"></div>
 </section>
 <!-- /Page Header--> 
 
@@ -74,7 +72,7 @@ error_reporting(0);
           <div class="sorting-count">
 <?php 
 //Query for Listing count
-$sql = "SELECT id from tblvehicles";
+$sql = "SELECT veh_ID from vehicle";
 $query = $dbh -> prepare($sql);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
@@ -84,7 +82,7 @@ $cnt=$query->rowCount();
 </div>
 </div>
 
-<?php $sql = "SELECT tblvehicles.*,tblbrands.BrandName,tblbrands.id as bid  from tblvehicles join tblbrands on tblbrands.id=tblvehicles.VehiclesBrand";
+<?php $sql = "SELECT * FROM vehicle";
 $query = $dbh -> prepare($sql);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
@@ -94,17 +92,17 @@ if($query->rowCount() > 0)
 foreach($results as $result)
 {  ?>
         <div class="product-listing-m gray-bg">
-          <div class="product-listing-img"><img src="admin/img/vehicleimages/<?php echo htmlentities($result->Vimage1);?>" class="img-responsive" alt="Image" /> </a> 
+          <div class="product-listing-img"><img src="assets/images/<?php echo htmlentities($result->veh_Image_1);?> "class="img-responsive" alt="Image" /> </a> 
           </div>
           <div class="product-listing-content">
-            <h5><a href="vehical-details.php?vhid=<?php echo htmlentities($result->id);?>"><?php echo htmlentities($result->BrandName);?> , <?php echo htmlentities($result->VehiclesTitle);?></a></h5>
-            <p class="list-price">$<?php echo htmlentities($result->PricePerDay);?> Per Day</p>
+            <h5><a href="vehical-details.php?vhid=<?php echo htmlentities($result->id);?>"><?php echo htmlentities($result->veh_Brand);?> , <?php echo htmlentities($result->veh_Model);?></a></h5>
+            <p class="list-price">RM<?php echo htmlentities($result->price_per_Day);?> Per Day</p>
             <ul>
-              <li><i class="fa fa-user" aria-hidden="true"></i><?php echo htmlentities($result->SeatingCapacity);?> seats</li>
-              <li><i class="fa fa-calendar" aria-hidden="true"></i><?php echo htmlentities($result->ModelYear);?> model</li>
-              <li><i class="fa fa-car" aria-hidden="true"></i><?php echo htmlentities($result->FuelType);?></li>
+              <li><i class="fa fa-user" aria-hidden="true"></i><?php echo htmlentities($result->seating_Capacity);?> seats</li>
+              <li><i class="fa fa-calendar" aria-hidden="true"></i><?php echo htmlentities($result->manufacture_Year);?> Model</li>
+              <li><i class="fa fa-car" aria-hidden="true"></i><?php echo htmlentities($result->fuel_Type);?></li>
             </ul>
-            <a href="vehical-details.php?vhid=<?php echo htmlentities($result->id);?>" class="btn">View Details <span class="angle_arrow"><i class="fa fa-angle-right" aria-hidden="true"></i></span></a>
+            <a href="vehical-details.php?vhid=<?php echo htmlentities($result->veh_ID);?>" class="btn">View Details <span class="angle_arrow"><i class="fa fa-angle-right" aria-hidden="true"></i></span></a>
           </div>
         </div>
       <?php }} ?>

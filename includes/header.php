@@ -49,7 +49,7 @@ if($query->rowCount() > 0)
 foreach($results as $result)
 	{
 
-	 echo htmlentities($result->FullName); }}
+	 echo htmlentities($result->F_Name); }}
    ?>
    <i class="fa fa-angle-down" aria-hidden="true"></i></a>
               <ul class="dropdown-menu">

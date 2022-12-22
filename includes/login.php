@@ -1,19 +1,22 @@
 <?php
-
+session_start();
+include('config.php');
+error_reporting(0);
 if(isset($_POST['login']))
 {
 $username=$_POST['username'];
 $password=md5($_POST['password']);
-$sql ="SELECT cust_Username,password,F_Name FROM customer WHERE cust_Username=:username and password=:password";
+$sql ="SELECT cust_Username,LoginPassword,F_Name FROM customer WHERE cust_Username=:username AND LoginPassword=:password";
 $query= $dbh -> prepare($sql);
 $query-> bindParam(':username', $username, PDO::PARAM_STR);
 $query-> bindParam(':password', $password, PDO::PARAM_STR);
+$query-> bindParam(':firstname', $fname, PDO::PARAM_STR);
 $query-> execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
 if($query->rowCount() > 0)
 {
 $_SESSION['login']=$_POST['username'];
-$_SESSION['firstname']=$results->FullName;
+$_SESSION['firstname']=$results->F_Name;
 $currentpage=$_SERVER['REQUEST_URI'];
 echo "<script type='text/javascript'> document.location = '$currentpage'; </script>";
 } else{
@@ -24,7 +27,6 @@ echo "<script type='text/javascript'> document.location = '$currentpage'; </scri
 }
 
 ?>
-
 <div class="modal fade" id="loginform">
   <div class="modal-dialog" role="document">
     <div class="modal-content">

@@ -8,7 +8,7 @@ $phone=$_POST['phoneno'];
 $username=$_POST['username']; 
 //$password=$_POST['password']; 
 $password=md5($_POST['password']); 
-$sql="INSERT INTO customer(F_Name,L_Name,PhoneNo,cust_Username,password) VALUES(:firstname,:lastname,:phoneno,:username,:password)";
+$sql="INSERT INTO customer(F_Name,L_Name,PhoneNo,cust_Username,LoginPassword) VALUES(:firstname,:lastname,:phoneno,:username,:password)";
 $query = $dbh->prepare($sql);
 $query->bindParam(':firstname',$fname,PDO::PARAM_STR);
 $query->bindParam(':lastname',$lname,PDO::PARAM_STR);

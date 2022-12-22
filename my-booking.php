@@ -11,7 +11,7 @@ else{
 <html lang="en">
 <head>
 
-<title>V-Rental - My Reservation</title>
+<title>V-Rental | My Reservation</title>
 <!--Bootstrap -->
 <link rel="stylesheet" href="assets/css/bootstrap.min.css" type="text/css">
 <!--Custom Style -->
