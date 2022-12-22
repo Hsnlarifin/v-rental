@@ -2,15 +2,17 @@
 //error_reporting(0);
 if(isset($_POST['signup']))
 {
-$fname=$_POST['fullname'];
-$email=$_POST['emailid']; 
-$mobile=$_POST['mobileno'];
+$fname=$_POST['firstname'];
+$lname=$_POST['lastname'];
+$phone=$_POST['phoneno'];
+$username=$_POST['username']; 
 $password=md5($_POST['password']); 
-$sql="INSERT INTO  tblusers(FullName,EmailId,ContactNo,Password) VALUES(:fname,:email,:mobile,:password)";
+$sql="INSERT INTO customer(F_Name,L_Name,ContactNo,cust_Username,password) VALUES(:firstname,:lastname,:phoneno,:username,:password)";
 $query = $dbh->prepare($sql);
-$query->bindParam(':fname',$fname,PDO::PARAM_STR);
-$query->bindParam(':email',$email,PDO::PARAM_STR);
-$query->bindParam(':mobile',$mobile,PDO::PARAM_STR);
+$query->bindParam(':firstname',$fname,PDO::PARAM_STR);
+$query->bindParam(':lastname',$lname,PDO::PARAM_STR);
+$query->bindParam(':phoneno',$phone,PDO::PARAM_STR);
+$query->bindParam(':username',$username,PDO::PARAM_STR);
 $query->bindParam(':password',$password,PDO::PARAM_STR);
 $query->execute();
 $lastInsertId = $dbh->lastInsertId();
@@ -32,7 +34,7 @@ function checkAvailability() {
 $("#loaderIcon").show();
 jQuery.ajax({
 url: "check_availability.php",
-data:'emailid='+$("#emailid").val(),
+data:'username='+$("#username").val(),
 type: "POST",
 success:function(data){
 $("#user-availability-status").html(data);
@@ -67,13 +69,16 @@ return true;
             <div class="col-md-12 col-sm-6">
               <form  method="post" name="signup" onSubmit="return valid();">
                 <div class="form-group">
-                  <input type="text" class="form-control" name="fullname" placeholder="Full Name" required="required">
-                </div>
-                      <div class="form-group">
-                  <input type="text" class="form-control" name="mobileno" placeholder="Mobile Number" maxlength="10" required="required">
+                  <input type="text" class="form-control" name="firstname" placeholder="First Name" required="required">
                 </div>
                 <div class="form-group">
-                  <input type="email" class="form-control" name="emailid" id="emailid" onBlur="checkAvailability()" placeholder="Email Address" required="required">
+                  <input type="text" class="form-control" name="lastname" placeholder="Last Name" required="required">
+                </div>
+                <div class="form-group">
+                  <input type="text" class="form-control" name="phoneno" placeholder="Phone Number" maxlength="11" required="required">
+                </div>                     
+                <div class="form-group">
+                  <input type="email" class="form-control" name="username" id="username" onBlur="checkAvailability()" placeholder="Username" required="required">
                    <span id="user-availability-status" style="font-size:12px;"></span> 
                 </div>
                 <div class="form-group">

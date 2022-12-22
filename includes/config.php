@@ -1,4 +1,5 @@
 <?php 
+/*
 // DB credentials.
 define('DB_HOST','localhost');
 define('DB_USER','root');
@@ -13,4 +14,22 @@ catch (PDOException $e)
 {
 exit("Error: " . $e->getMessage());
 }
+*/
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "veh_rental";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+}
+//echo "Connected successfully";
+
 ?>
+
+
