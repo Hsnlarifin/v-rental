@@ -1,5 +1,4 @@
 
-
 <header>
   <div class="default-header">
     <div class="container">
@@ -9,18 +8,9 @@
         </div>
         <div class="col-sm-9 col-md-10">
           <div class="header_info">
-         <?php
-         $sql = "SELECT EmailId,ContactNo from tblcontactusinfo";
-$query = $dbh -> prepare($sql);
-$query->execute();
-$results=$query->fetchAll(PDO::FETCH_OBJ);
-foreach ($results as $result) {
-$email=$result->EmailId;
-$contactno=$result->ContactNo;
-}
-?>  
-
-<?php   if(strlen($_SESSION['login'])==0)
+               
+<?php   
+if(strlen($_SESSION['login'])==0)
 	{	
 ?>
  <div class="login_btn"> <a href="#loginform" class="btn btn-s uppercase" data-toggle="modal" data-dismiss="modal">Login</a> </div>
@@ -46,11 +36,11 @@ else{
             
             <li class="dropdown"> <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-circle" aria-hidden="true"></i> 
 <?php 
-
-$email=$_SESSION['login'];
-$sql ="SELECT FullName FROM tblusers WHERE EmailId=:email ";
+/*
+$custid=$_SESSION['login'];
+$sql ="SELECT a.f_name FROM user a , customer b WHERE User_ID=:custid";
 $query= $dbh -> prepare($sql);
-$query-> bindParam(':email', $email, PDO::PARAM_STR);
+$query-> bindParam(':custid', $custid, PDO::PARAM_STR);
 $query-> execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
 if($query->rowCount() > 0)
@@ -58,7 +48,9 @@ if($query->rowCount() > 0)
 foreach($results as $result)
 	{
 
-	 echo htmlentities($result->FullName); }}?>
+	 echo htmlentities($result->FullName); }}
+   */
+   ?>
    <i class="fa fa-angle-down" aria-hidden="true"></i></a>
               <ul class="dropdown-menu">
            <?php if($_SESSION['login']){?>
@@ -73,17 +65,7 @@ foreach($results as $result)
             </li>
           </ul>
         </div>
-
-        <!-- search bar
-        <div class="header_search">
-          <div id="search_toggle"><i class="fa fa-search" aria-hidden="true"></i></div>
-          <form action="search.php" method="post" id="header-search-form">
-            <input type="text" placeholder="Search..." name="searchdata" class="form-control" required="true">
-            <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-          </form>
-        </div>
-           -->
-           
+     
       </div>
       <div class="collapse navbar-collapse" id="navigation">
         <ul class="nav navbar-nav">
@@ -91,7 +73,7 @@ foreach($results as $result)
           <li><a href="page.php?type=aboutus">About</a></li>
           <li><a href="car-listing.php">Available Vehicles</a>
           <li><a href="page.php?type=faqs">Locations</a></li>
-          <li><a href="contact-us.php">Contact Us</a></li>
+          <!-- <li><a href="contact-us.php">Contact Us</a></li> -->
         </ul>
       </div>
     </div>

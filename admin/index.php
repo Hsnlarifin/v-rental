@@ -59,10 +59,10 @@ echo "<script type='text/javascript'> document.location = 'dashboard.php'; </scr
 
 								
 									<label for="" class="text-uppercase text-sm">Your Username </label>
-									<input type="text" placeholder="Username" name="username" class="form-control mb">
+									<input type="text" placeholder="Username" name="username" class="form-control mb" required>
 
 									<label for="" class="text-uppercase text-sm">Password</label>
-									<input type="password" placeholder="Password" name="password" class="form-control mb">
+									<input type="password" placeholder="Password" name="password" class="form-control mb" required>
 		
 
 									<button class="btn btn-primary btn-block" name="login" type="submit">LOGIN</button>

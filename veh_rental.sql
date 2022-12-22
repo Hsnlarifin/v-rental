@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 13, 2022 at 11:27 AM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 8.1.6
+-- Generation Time: Dec 22, 2022 at 02:53 PM
+-- Server version: 10.4.21-MariaDB
+-- PHP Version: 8.0.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -16,8 +16,6 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
-
-
 
 --
 -- Database: `veh_rental`
@@ -44,13 +42,16 @@ CREATE TABLE `branch` (
 
 CREATE TABLE `customer` (
   `cust_ID` int(10) NOT NULL,
-  `user_ID` int(10) NOT NULL,
   `cust_Username` varchar(50) COLLATE utf8mb4_bin NOT NULL,
-  `cust_Pass` varchar(30) COLLATE utf8mb4_bin NOT NULL,
-  `street` varchar(100) COLLATE utf8mb4_bin NOT NULL,
-  `postcode` int(6) NOT NULL,
-  `city` varchar(100) COLLATE utf8mb4_bin NOT NULL,
-  `state` varchar(100) COLLATE utf8mb4_bin NOT NULL
+  `password` varchar(30) COLLATE utf8mb4_bin NOT NULL,
+  `F_Name` varchar(50) COLLATE utf8mb4_bin DEFAULT NULL,
+  `L_Name` varchar(50) COLLATE utf8mb4_bin DEFAULT NULL,
+  `street` varchar(100) COLLATE utf8mb4_bin DEFAULT NULL,
+  `postcode` int(6) DEFAULT NULL,
+  `city` varchar(100) COLLATE utf8mb4_bin DEFAULT NULL,
+  `state` varchar(100) COLLATE utf8mb4_bin DEFAULT NULL,
+  `Regist_Date` timestamp NULL DEFAULT current_timestamp(),
+  `Update_Date` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- --------------------------------------------------------
@@ -96,13 +97,13 @@ CREATE TABLE `location` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `vehicle_Status`
+-- Table structure for table `maintenance`
 --
 
-CREATE TABLE `vehicle_status` (
-  `veh_ID` int(10) NOT NULL,
+CREATE TABLE `maintenance` (
   `maintenance_ID` int(10) NOT NULL,
-  `status` varchar(100) COLLATE utf8mb4_bin NOT NULL
+  `service_Type` varchar(100) COLLATE utf8mb4_bin NOT NULL,
+  `service_Date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- --------------------------------------------------------
@@ -125,11 +126,15 @@ CREATE TABLE `payment` (
 --
 
 CREATE TABLE `reservation` (
-  `res_ID` int(10) NOT NULL,
+  `resv_ID` int(10) NOT NULL,
+  `Booking_Key` int(11) DEFAULT NULL,
   `cust_ID` int(10) NOT NULL,
+  `veh_ID` int(10) NOT NULL,
+  `from_Date` varchar(20) COLLATE utf8mb4_bin DEFAULT NULL,
+  `to_Date` varchar(20) COLLATE utf8mb4_bin DEFAULT NULL,
+  `Status` varchar(30) COLLATE utf8mb4_bin DEFAULT NULL,
   `insurance_ID` int(10) NOT NULL,
-  `amount` float NOT NULL,
-  `date_Reserve` date NOT NULL
+  `amount` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 -- --------------------------------------------------------
@@ -140,10 +145,11 @@ CREATE TABLE `reservation` (
 
 CREATE TABLE `staff` (
   `staff_ID` int(10) NOT NULL,
-  `user_ID` int(10) NOT NULL,
   `branch_ID` int(10) NOT NULL,
   `staff_Username` varchar(50) COLLATE utf8mb4_bin NOT NULL,
   `staff_Pass` varchar(30) COLLATE utf8mb4_bin NOT NULL,
+  `F_Name` varchar(50) COLLATE utf8mb4_bin DEFAULT NULL,
+  `L_Name` varchar(50) COLLATE utf8mb4_bin DEFAULT NULL,
   `staff_Position` varchar(100) COLLATE utf8mb4_bin NOT NULL,
   `staff_Salary` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
@@ -163,38 +169,24 @@ CREATE TABLE `supplier` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
---
-
-CREATE TABLE `user` (
-  `user_ID` int(10) NOT NULL,
-  `f_Name` varchar(255) COLLATE utf8mb4_bin NOT NULL,
-  `l_Name` varchar(255) COLLATE utf8mb4_bin NOT NULL,
-  `gender` varchar(6) COLLATE utf8mb4_bin NOT NULL,
-  `age` int(3) NOT NULL,
-  `email` varchar(60) COLLATE utf8mb4_bin NOT NULL,
-  `phoneNo` varchar(11) COLLATE utf8mb4_bin NOT NULL,
-  `license_Type` varchar(20) COLLATE utf8mb4_bin NOT NULL,
-  `expiration` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `vehicle`
 --
 
 CREATE TABLE `vehicle` (
   `veh_ID` int(10) NOT NULL,
-  `veh_Name` varchar(255) COLLATE utf8mb4_bin NOT NULL,
   `veh_Model` varchar(255) COLLATE utf8mb4_bin NOT NULL,
-  `brand` varchar(255) COLLATE utf8mb4_bin NOT NULL,
-  `colour` varchar(255) COLLATE utf8mb4_bin NOT NULL,
-  `capacity` varchar(255) COLLATE utf8mb4_bin NOT NULL,
+  `veh_Brand` varchar(255) COLLATE utf8mb4_bin NOT NULL,
+  `price_per_Day` int(11) DEFAULT NULL,
+  `fuel_Type` varchar(50) COLLATE utf8mb4_bin DEFAULT NULL,
+  `manufacture_Year` int(6) DEFAULT NULL,
+  `veh_Colour` varchar(255) COLLATE utf8mb4_bin NOT NULL,
+  `seating_Capacity` varchar(255) COLLATE utf8mb4_bin NOT NULL,
   `veh_Transmission` varchar(255) COLLATE utf8mb4_bin NOT NULL,
   `plateNo` varchar(10) COLLATE utf8mb4_bin NOT NULL,
-  `veh_Status` varchar(255) COLLATE utf8mb4_bin NOT NULL,
   `roadTax` varchar(255) COLLATE utf8mb4_bin NOT NULL,
+  `veh_Image_1` varchar(155) CHARACTER SET latin1 DEFAULT NULL,
+  `register_Date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `update_Date` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   `branch_ID` int(10) NOT NULL,
   `supp_ID` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
@@ -202,29 +194,13 @@ CREATE TABLE `vehicle` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `vehicle_details`
+-- Table structure for table `vehicle_status`
 --
 
-/*
-CREATE TABLE `vehicle_details` (
+CREATE TABLE `vehicle_status` (
   `veh_ID` int(10) NOT NULL,
-  `supp_ID` int(10) NOT NULL,
-  `branch_ID` int(10) NOT NULL,
-  `brand` varchar(255) COLLATE utf8mb4_bin NOT NULL,
-  `color` varchar(255) COLLATE utf8mb4_bin NOT NULL,
-  `capacity` int(3) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-*/
--- --------------------------------------------------------
-
---
--- Table structure for table `maintenance`
---
-
-CREATE TABLE `maintenance`(
   `maintenance_ID` int(10) NOT NULL,
-  `service_Type` varchar(100) COLLATE utf8mb4_bin NOT NULL,
-  `service_Date` date NOT NULL
+  `status` varchar(100) COLLATE utf8mb4_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
@@ -242,8 +218,7 @@ ALTER TABLE `branch`
 -- Indexes for table `customer`
 --
 ALTER TABLE `customer`
-  ADD PRIMARY KEY (`cust_ID`),
-  ADD KEY `fk2_user_ID` (`user_ID`);
+  ADD PRIMARY KEY (`cust_ID`);
 
 --
 -- Indexes for table `drop_point`
@@ -266,11 +241,10 @@ ALTER TABLE `location`
   ADD PRIMARY KEY (`location_ID`);
 
 --
--- Indexes for table `vehicle_Status`
+-- Indexes for table `maintenance`
 --
-ALTER TABLE `vehicle_status`
-  ADD PRIMARY KEY (`veh_ID`,`maintenance_ID`),
-  ADD KEY `fk_maintenance_ID` (`maintenance_ID`);
+ALTER TABLE `maintenance`
+  ADD PRIMARY KEY (`maintenance_ID`);
 
 --
 -- Indexes for table `payment`
@@ -283,16 +257,16 @@ ALTER TABLE `payment`
 -- Indexes for table `reservation`
 --
 ALTER TABLE `reservation`
-  ADD PRIMARY KEY (`res_ID`),
+  ADD PRIMARY KEY (`resv_ID`),
   ADD KEY `fk2_cust_ID` (`cust_ID`),
-  ADD KEY `fk_insurance_ID` (`insurance_ID`);
+  ADD KEY `fk_insurance_ID` (`insurance_ID`),
+  ADD KEY `fk3_veh_ID` (`veh_ID`);
 
 --
 -- Indexes for table `staff`
 --
 ALTER TABLE `staff`
   ADD PRIMARY KEY (`staff_ID`),
-  ADD KEY `fk_user_ID` (`user_ID`),
   ADD KEY `fk_branch_ID` (`branch_ID`);
 
 --
@@ -303,12 +277,6 @@ ALTER TABLE `supplier`
   ADD KEY `fk2_location_ID` (`location_ID`);
 
 --
--- Indexes for table `user`
---
-ALTER TABLE `user`
-  ADD PRIMARY KEY (`user_ID`);
-
---
 -- Indexes for table `vehicle`
 --
 ALTER TABLE `vehicle`
@@ -316,19 +284,12 @@ ALTER TABLE `vehicle`
   ADD KEY `fk_supp_ID` (`supp_ID`),
   ADD KEY `fk3_branch_ID` (`branch_ID`);
 
-/*
--- Indexes for table `vehicle_details`
 --
-ALTER TABLE `vehicle_details`
-  ADD PRIMARY KEY (`veh_ID`,`supp_ID`),
-  ADD KEY `fk_supp_ID` (`supp_ID`),
-  ADD KEY `fk3_branch_ID` (`branch_ID`);
-*/
+-- Indexes for table `vehicle_status`
 --
--- Indexes for table `maintenance`
---
-ALTER TABLE `maintenance`
-  ADD PRIMARY KEY (`maintenance_ID`);
+ALTER TABLE `vehicle_status`
+  ADD PRIMARY KEY (`veh_ID`,`maintenance_ID`),
+  ADD KEY `fk_maintenance_ID` (`maintenance_ID`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -344,7 +305,7 @@ ALTER TABLE `branch`
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `cust_ID` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `cust_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `insurance`
@@ -359,6 +320,12 @@ ALTER TABLE `location`
   MODIFY `location_ID` int(10) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `maintenance`
+--
+ALTER TABLE `maintenance`
+  MODIFY `maintenance_ID` int(10) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
@@ -368,7 +335,7 @@ ALTER TABLE `payment`
 -- AUTO_INCREMENT for table `reservation`
 --
 ALTER TABLE `reservation`
-  MODIFY `res_ID` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `resv_ID` int(10) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `staff`
@@ -383,22 +350,10 @@ ALTER TABLE `supplier`
   MODIFY `supp_ID` int(10) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `user`
---
-ALTER TABLE `user`
-  MODIFY `user_ID` int(10) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `vehicle`
 --
 ALTER TABLE `vehicle`
   MODIFY `veh_ID` int(10) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `maintenance`
---
-ALTER TABLE `maintenance`
-  MODIFY `maintenance_ID` int(10) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
@@ -411,17 +366,11 @@ ALTER TABLE `branch`
   ADD CONSTRAINT `fk_location_ID` FOREIGN KEY (`location_ID`) REFERENCES `location` (`location_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `customer`
---
-ALTER TABLE `customer`
-  ADD CONSTRAINT `fk2_user_ID` FOREIGN KEY (`user_ID`) REFERENCES `user` (`user_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Constraints for table `drop_point`
 --
 ALTER TABLE `drop_point`
   ADD CONSTRAINT `fk3_location_ID` FOREIGN KEY (`location_ID`) REFERENCES `location` (`location_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_res_ID` FOREIGN KEY (`res_ID`) REFERENCES `reservation` (`res_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_res_ID` FOREIGN KEY (`res_ID`) REFERENCES `reservation` (`resv_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `insurance`
@@ -430,32 +379,24 @@ ALTER TABLE `insurance`
   ADD CONSTRAINT `fk2_supp_ID` FOREIGN KEY (`supp_ID`) REFERENCES `supplier` (`supp_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `vehicle_Status`
---
-/*
-ALTER TABLE `Vehice_Status`
-  ADD CONSTRAINT `fk_veh_ID` FOREIGN KEY (`veh_ID`) REFERENCES `vehicle` (`veh_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_maintenance_ID` FOREIGN KEY (`maintenance_ID`) REFERENCES `maintenance` (`maintenance_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
-*/
---
 -- Constraints for table `payment`
 --
 ALTER TABLE `payment`
-  ADD CONSTRAINT `fk2_res_ID` FOREIGN KEY (`res_ID`) REFERENCES `reservation` (`res_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk2_res_ID` FOREIGN KEY (`res_ID`) REFERENCES `reservation` (`resv_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `reservation`
 --
 ALTER TABLE `reservation`
   ADD CONSTRAINT `fk2_cust_ID` FOREIGN KEY (`cust_ID`) REFERENCES `customer` (`cust_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk3_veh_ID` FOREIGN KEY (`veh_ID`) REFERENCES `vehicle` (`veh_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_insurance_ID` FOREIGN KEY (`insurance_ID`) REFERENCES `insurance` (`insurance_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `staff`
 --
 ALTER TABLE `staff`
-  ADD CONSTRAINT `fk_branch_ID` FOREIGN KEY (`branch_ID`) REFERENCES `branch` (`branch_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_user_ID` FOREIGN KEY (`user_ID`) REFERENCES `user` (`user_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_branch_ID` FOREIGN KEY (`branch_ID`) REFERENCES `branch` (`branch_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `supplier`
@@ -464,18 +405,12 @@ ALTER TABLE `supplier`
   ADD CONSTRAINT `fk2_location_ID` FOREIGN KEY (`location_ID`) REFERENCES `location` (`location_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `vehicle_details`
+-- Constraints for table `vehicle`
 --
-/*
-ALTER TABLE `vehicle_details`
-  ADD CONSTRAINT `fk2_veh_ID` FOREIGN KEY (`veh_ID`) REFERENCES `vehicle` (`veh_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk3_branch_ID` FOREIGN KEY (`branch_ID`) REFERENCES `branch` (`branch_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_supp_ID` FOREIGN KEY (`supp_ID`) REFERENCES `supplier` (`supp_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
-*/
-
 ALTER TABLE `vehicle`
   ADD CONSTRAINT `fk3_branch_ID` FOREIGN KEY (`branch_ID`) REFERENCES `branch` (`branch_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_supp_ID` FOREIGN KEY (`supp_ID`) REFERENCES `supplier` (`supp_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

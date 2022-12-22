@@ -24,7 +24,7 @@ error_reporting(0);
 <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/images/favicon-icon/apple-touch-icon-114-precomposed.html">
 <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/images/favicon-icon/apple-touch-icon-72-precomposed.png">
 <link rel="apple-touch-icon-precomposed" href="assets/images/favicon-icon/apple-touch-icon-57-precomposed.png">
-<link rel="shortcut icon" href="assets/images/tab_icon.png">
+<link rel="shortcut icon" href="images/tab_icon.png">
 <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet"> 
 </head>
 <body>
@@ -34,19 +34,24 @@ error_reporting(0);
 <?php include('includes/header.php');?>
 <!-- Header --> 
 
+
 <!-- Resent Cat-->
 <section class="section-padding gray-bg">
   <div class="container">
     <div class="section-header text-center">
-      <h2>Welcome to V-Rental <span>Car2You</span></h2>
+      <h2>Find the Best <span>CarForYou</span></h2>
       <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.</p>
     </div>
-    <div class="row">           
-      </div>
-    </div>
-  </div>
+    <div class="row"> 
+        
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="resentnewcar">
+   </div>
+  
 </section>
-<!-- /Resent Cat --> 
+<!-- /Fun Facts--> 
+
+
 
 <!--Footer -->
 <?php include('includes/footer.php');?>

@@ -52,10 +52,7 @@ else{
 </head>
 <body>
 
-<!-- Start Switcher -->
 
-<!-- /Switcher -->  
-        
 <!--Header-->
 <?php include('includes/header.php');?>
 <!--Page Header-->

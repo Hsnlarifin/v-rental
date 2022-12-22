@@ -1,17 +1,21 @@
 <?php
+/*
 if(isset($_POST['login']))
 {
-$email=$_POST['email'];
+$username=$_POST['username'];
 $password=md5($_POST['password']);
-$sql ="SELECT EmailId,Password,FullName FROM tblusers WHERE EmailId=:email and Password=:password";
+$custid=$_POST['custid'];
+$sql ="SELECT cust_Username,cust_Pass,cust_ID FROM customer WHERE cust_Username=:username and cust_Pass=:password";
 $query= $dbh -> prepare($sql);
-$query-> bindParam(':email', $email, PDO::PARAM_STR);
+$query-> bindParam(':username', $username, PDO::PARAM_STR);
 $query-> bindParam(':password', $password, PDO::PARAM_STR);
+$query-> bindParam(':userid', $userid, PDO::PARAM_STR);
 $query-> execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
 if($query->rowCount() > 0)
 {
-$_SESSION['login']=$_POST['email'];
+$_SESSION['login']=$_POST['username'];
+$_SESSION['login']=$_POST['custid'];
 $_SESSION['fname']=$results->FullName;
 $currentpage=$_SERVER['REQUEST_URI'];
 echo "<script type='text/javascript'> document.location = '$currentpage'; </script>";
@@ -21,8 +25,10 @@ echo "<script type='text/javascript'> document.location = '$currentpage'; </scri
 
 }
 
-}
 
+
+}
+*/
 ?>
 
 <div class="modal fade" id="loginform">
@@ -57,8 +63,9 @@ echo "<script type='text/javascript'> document.location = '$currentpage'; </scri
         </div>
       </div>
       <div class="modal-footer text-center">
-        <p>Don't have an account? <a href="#signupform" data-toggle="modal" data-dismiss="modal">Signup Here</a></p>
+        <p>New User? <a href="#signupform" data-toggle="modal" data-dismiss="modal"> Signup Here</a></p>
         <p><a href="#forgotpassword" data-toggle="modal" data-dismiss="modal">Forgot Password ?</a></p>
+        <p><a href="admin/index.php">Administrator</a></p>
       </div>
     </div>
   </div>
