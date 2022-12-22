@@ -4,12 +4,10 @@ if(isset($_POST['login']))
 {
 $username=$_POST['username'];
 $password=md5($_POST['password']);
-$fname=$_POST['firstname'];
 $sql ="SELECT cust_Username,password,F_Name FROM customer WHERE cust_Username=:username and password=:password";
 $query= $dbh -> prepare($sql);
 $query-> bindParam(':username', $username, PDO::PARAM_STR);
 $query-> bindParam(':password', $password, PDO::PARAM_STR);
-$query-> bindParam(':firstname', $fname, PDO::PARAM_STR);
 $query-> execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
 if($query->rowCount() > 0)
@@ -21,10 +19,7 @@ echo "<script type='text/javascript'> document.location = '$currentpage'; </scri
 } else{
   
   echo "<script>alert('Invalid Details');</script>";
-
 }
-
-
 
 }
 

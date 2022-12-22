@@ -12,7 +12,7 @@
           <?php   if(strlen($_SESSION['login'])==0)
 	{	
 ?>
- <div class="login_btn"> <a href="#loginform" class="btn btn-xs uppercase" data-toggle="modal" data-dismiss="modal">Login / Register</a> </div>
+ <div class="login_btn"> <a href="#loginform" class="btn btn-s uppercase" data-toggle="modal" data-dismiss="modal">LOGIN</a> </div>
 <?php }
 else{ 
 
@@ -39,7 +39,7 @@ echo "Welcome!";
 <?php 
 
 $username=$_SESSION['login'];
-$sql ="SELECT F_name FROM customer WHERE cust_Username=:username";
+$sql ="SELECT F_Name FROM customer WHERE cust_Username=:username";
 $query= $dbh -> prepare($sql);
 $query-> bindParam(':username', $username, PDO::PARAM_STR);
 $query-> execute();
