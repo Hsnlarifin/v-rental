@@ -1,22 +1,21 @@
 <?php
-/*
+
 if(isset($_POST['login']))
 {
 $username=$_POST['username'];
 $password=md5($_POST['password']);
-$custid=$_POST['custid'];
-$sql ="SELECT cust_Username,cust_Pass,cust_ID FROM customer WHERE cust_Username=:username and cust_Pass=:password";
+$fname=$_POST['firstname'];
+$sql ="SELECT cust_Username,password,F_Name FROM customer WHERE cust_Username=:username and password=:password";
 $query= $dbh -> prepare($sql);
 $query-> bindParam(':username', $username, PDO::PARAM_STR);
 $query-> bindParam(':password', $password, PDO::PARAM_STR);
-$query-> bindParam(':userid', $userid, PDO::PARAM_STR);
+$query-> bindParam(':firstname', $fname, PDO::PARAM_STR);
 $query-> execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
 if($query->rowCount() > 0)
 {
 $_SESSION['login']=$_POST['username'];
-$_SESSION['login']=$_POST['custid'];
-$_SESSION['fname']=$results->FullName;
+$_SESSION['firstname']=$results->FullName;
 $currentpage=$_SERVER['REQUEST_URI'];
 echo "<script type='text/javascript'> document.location = '$currentpage'; </script>";
 } else{
@@ -28,7 +27,7 @@ echo "<script type='text/javascript'> document.location = '$currentpage'; </scri
 
 
 }
-*/
+
 ?>
 
 <div class="modal fade" id="loginform">
@@ -44,7 +43,7 @@ echo "<script type='text/javascript'> document.location = '$currentpage'; </scri
             <div class="col-md-12 col-sm-6">
               <form method="post">
                 <div class="form-group">
-                  <input type="email" class="form-control" name="email" placeholder="Email address*">
+                  <input type="email" class="form-control" name="username" placeholder="Username*">
                 </div>
                 <div class="form-group">
                   <input type="password" class="form-control" name="password" placeholder="Password*">

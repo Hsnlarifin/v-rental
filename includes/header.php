@@ -9,13 +9,14 @@
         <div class="col-sm-9 col-md-10">
           <div class="header_info">
                
-<?php   
-if(strlen($_SESSION['login'])==0)
+          <?php   if(strlen($_SESSION['login'])==0)
 	{	
 ?>
- <div class="login_btn"> <a href="#loginform" class="btn btn-s uppercase" data-toggle="modal" data-dismiss="modal">Login</a> </div>
+ <div class="login_btn"> <a href="#loginform" class="btn btn-xs uppercase" data-toggle="modal" data-dismiss="modal">Login / Register</a> </div>
 <?php }
 else{ 
+
+echo "Welcome!";
 
  } ?>
           </div>
@@ -36,11 +37,11 @@ else{
             
             <li class="dropdown"> <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-circle" aria-hidden="true"></i> 
 <?php 
-/*
-$custid=$_SESSION['login'];
-$sql ="SELECT a.f_name FROM user a , customer b WHERE User_ID=:custid";
+
+$username=$_SESSION['login'];
+$sql ="SELECT F_name FROM customer WHERE cust_Username=:username";
 $query= $dbh -> prepare($sql);
-$query-> bindParam(':custid', $custid, PDO::PARAM_STR);
+$query-> bindParam(':username', $username, PDO::PARAM_STR);
 $query-> execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
 if($query->rowCount() > 0)
@@ -49,7 +50,6 @@ foreach($results as $result)
 	{
 
 	 echo htmlentities($result->FullName); }}
-   */
    ?>
    <i class="fa fa-angle-down" aria-hidden="true"></i></a>
               <ul class="dropdown-menu">

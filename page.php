@@ -45,7 +45,9 @@ include('includes/config.php');
         
 <!--Header-->
 <?php include('includes/header.php');?>
-                      <?php 
+ 
+<?php 
+ /*                   
 $pagetype=$_GET['type'];
 $sql = "SELECT type,detail,PageName from tblpages where type=:pagetype";
 $query = $dbh -> prepare($sql);
@@ -56,22 +58,8 @@ $cnt=1;
 if($query->rowCount() > 0)
 {
 foreach($results as $result)
-{ ?>
-<section class="page-header aboutus_page">
-  <div class="container">
-    
-      <div class="page-heading">
-        <h1><?php   echo htmlentities($result->PageName); ?></h1>
-      </div>
-      <ul class="coustom-breadcrumb">
-        <li><a href="#">Home</a></li>
-        <li><?php   echo htmlentities($result->PageName); ?></li>
-      </ul>
-    
-  </div>
-  <!-- Dark Overlay-->
-  <div class="dark-overlay"></div>
-</section>
+{ 
+  ?> 
 <section class="about_us section-padding">
   <div class="container">
     <div class="section-header text-center">
@@ -80,16 +68,22 @@ foreach($results as $result)
       <h2><?php   echo htmlentities($result->PageName); ?></h2>
       <p><?php  echo $result->detail; ?> </p>
     </div>
-   <?php } }?>
+   <?php } }
+   */
+   ?>
   </div>
 </section>
-<!-- /About-us--> 
 
 
 
 
 
-<<!--Footer -->
+
+
+
+
+
+<!--Footer -->
 <?php include('includes/footer.php');?>
 <!-- /Footer--> 
 
