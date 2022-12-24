@@ -104,7 +104,11 @@ foreach($results as $result)
               <li><i class="fa fa-calendar" aria-hidden="true"></i><?php echo htmlentities($result->ModelYear);?> model</li>
               <li><i class="fa fa-car" aria-hidden="true"></i><?php echo htmlentities($result->FuelType);?></li>
             </ul>
+<<<<<<< Updated upstream
             <a href="vehical-details.php?vhid=<?php echo htmlentities($result->id);?>" class="btn">View Details <span class="angle_arrow"><i class="fa fa-angle-right" aria-hidden="true"></i></span></a>
+=======
+            <a href="vehicle-details.php?vhid=<?php echo htmlentities($result->veh_ID);?>" class="btn">View Details <span class="angle_arrow"><i class="fa fa-angle-right" aria-hidden="true"></i></span></a>
+>>>>>>> Stashed changes
           </div>
         </div>
       <?php }} ?>
@@ -122,7 +126,7 @@ foreach($results as $result)
                 <select class="form-control" name="brand">
                   <option>Select Brand</option>
 
-                  <?php $sql = "SELECT * from  tblbrands ";
+                  <?php $sql = "SELECT veh_Brand from  vehicle ";
 $query = $dbh -> prepare($sql);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
@@ -131,7 +135,7 @@ if($query->rowCount() > 0)
 {
 foreach($results as $result)
 {       ?>  
-<option value="<?php echo htmlentities($result->id);?>"><?php echo htmlentities($result->BrandName);?></option>
+<option value="<?php echo htmlentities($result->veh_ID);?>"><?php echo htmlentities($result->veh_Brand);?></option>
 <?php }} ?>
                  
                 </select>
