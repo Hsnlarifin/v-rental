@@ -55,7 +55,7 @@ error_reporting(0);
         <h1>Car Listing</h1>
       </div>
       <ul class="coustom-breadcrumb">
-        <li><a href="#">Home</a></li>
+        <li><a href="index.php">Home</a></li>
         <li>Car Listing</li>
       </ul>
     
@@ -104,11 +104,8 @@ foreach($results as $result)
               <li><i class="fa fa-calendar" aria-hidden="true"></i><?php echo htmlentities($result->ModelYear);?> model</li>
               <li><i class="fa fa-car" aria-hidden="true"></i><?php echo htmlentities($result->FuelType);?></li>
             </ul>
-<<<<<<< Updated upstream
-            <a href="vehical-details.php?vhid=<?php echo htmlentities($result->id);?>" class="btn">View Details <span class="angle_arrow"><i class="fa fa-angle-right" aria-hidden="true"></i></span></a>
-=======
+        
             <a href="vehicle-details.php?vhid=<?php echo htmlentities($result->veh_ID);?>" class="btn">View Details <span class="angle_arrow"><i class="fa fa-angle-right" aria-hidden="true"></i></span></a>
->>>>>>> Stashed changes
           </div>
         </div>
       <?php }} ?>
