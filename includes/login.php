@@ -4,24 +4,18 @@ if(isset($_POST['login']))
 {
 $username=$_POST['username'];
 $password=md5($_POST['password']);
-<<<<<<< Updated upstream
-$sql ="SELECT cust_Username,password,F_Name FROM customer WHERE cust_Username=:username and password=:password";
-=======
 $custid=$_POST['custid'];
-$sql ="SELECT cust_Username,LoginPassword,F_Name, cust_ID FROM customer WHERE cust_Username=:username AND Loginpassword=:password";
->>>>>>> Stashed changes
+$sql ="SELECT cust_Username,cust_Pass,user_ID,cust_ID FROM customer WHERE cust_Username=:username AND cust_Pass=:password";
 $query= $dbh -> prepare($sql);
 $query-> bindParam(':username', $username, PDO::PARAM_STR);
 $query-> bindParam(':password', $password, PDO::PARAM_STR);
+$query-> bindParam(':custid', $custid, PDO::PARAM_STR);
+$query-> bindParam(':userid', $result['user_ID'], PDO::PARAM_STR);
 $query-> execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
 if($query->rowCount() > 0)
 {
 $_SESSION['login']=$_POST['username'];
-<<<<<<< Updated upstream
-=======
-$_SESSION['login']=$_POST['custid'];
->>>>>>> Stashed changes
 $_SESSION['firstname']=$results->FullName;
 $currentpage=$_SERVER['REQUEST_URI'];
 echo "<script type='text/javascript'> document.location = '$currentpage'; </script>";
@@ -34,11 +28,6 @@ echo "<script type='text/javascript'> document.location = '$currentpage'; </scri
 
 ?>
 
-<<<<<<< Updated upstream
-=======
-
-
->>>>>>> Stashed changes
 <div class="modal fade" id="loginform">
   <div class="modal-dialog" role="document">
     <div class="modal-content">

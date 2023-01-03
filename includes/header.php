@@ -39,7 +39,14 @@ echo "Welcome!";
 <?php 
 
 $username=$_SESSION['login'];
-$sql ="SELECT F_Name FROM customer WHERE cust_Username=:username";
+//selection,project,sub-query
+
+$sql = "SELECT f_name FROM user WHERE user_ID = (
+    SELECT user_ID
+    FROM customer
+    WHERE cust_Username = :username)";
+
+//$sql ="SELECT user_ID FROM customer WHERE cust_Username=:username";
 $query= $dbh -> prepare($sql);
 $query-> bindParam(':username', $username, PDO::PARAM_STR);
 $query-> execute();
@@ -70,9 +77,9 @@ foreach($results as $result)
       <div class="collapse navbar-collapse" id="navigation">
         <ul class="nav navbar-nav">
           <li><a href="index.php">Home</a>    </li>    	 
-          <li><a href="page.php?type=aboutus">About</a></li>
-          <li><a href="car-listing.php">Available Vehicles</a>
-          <li><a href="page.php?type=faqs">Locations</a></li>
+          <!--<li><a href="page.php?type=aboutus">About</a></li>-->
+          <li><a href="car-listing.php">Available Vehicles</a>         
+          <li><a href="page.php?type=faqs">Locate Us</a></li>
           <!-- <li><a href="contact-us.php">Contact Us</a></li> -->
         </ul>
       </div>

@@ -36,8 +36,7 @@ error_reporting(0);
 <section class="section-padding gray-bg">
   <div class="container">
     <div class="section-header text-center">
-      <h2>Find the Best <span>CarForYou</span></h2>
-      <p>dsadsa</p>
+      <h2>Find the Best <span>CarForYou</span></h2>     
     </div>
     <div class="row"> 
         
@@ -71,8 +70,6 @@ error_reporting(0);
 <script src="assets/js/jquery.min.js"></script>
 <script src="assets/js/bootstrap.min.js"></script> 
 <script src="assets/js/interface.js"></script> 
-<!--Switcher-->
-<script src="assets/switcher/js/switcher.js"></script>
 <!--bootstrap-slider-JS--> 
 <script src="assets/js/bootstrap-slider.min.js"></script> 
 <!--Slider-JS--> 
