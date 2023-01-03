@@ -12,7 +12,7 @@ $todate=$_POST['todate'];
 //$message=$_POST['message'];
 $username=$_SESSION['login'];
 $custid=$_SESSION['login'];
-$status=0;
+$status='PENDING';
 $vhid=$_GET['vhid'];
 $bookingkey=mt_rand(100000000, 999999999);
 $ret="SELECT * FROM reservation where (:fromdate BETWEEN date(from_Date) and date(to_Date) || :todate BETWEEN date(from_Date) and date(to_Date) || date(from_Date) BETWEEN :fromdate and :todate) and veh_ID=:vhid";
@@ -26,7 +26,6 @@ $results1=$query1->fetchAll(PDO::FETCH_OBJ);
 
 if($query1->rowCount()==0)
 {
-
 $sql="INSERT INTO reservation(Booking_Key,cust_ID,veh_ID,from_Date,to_Date,Status) VALUES(:bookingkey,:custid,:vhid,:fromdate,:todate,:status)";
 $query = $dbh->prepare($sql);
 $query->bindParam(':bookingkey',$bookingkey,PDO::PARAM_STR);
@@ -89,25 +88,33 @@ echo "<script>alert('Something went wrong. Please try again');</script>";
 <?php 
 
 $vhid=intval($_GET['vhid']);
-$sql = "SELECT * FROM vehicle WHERE veh_ID =:vhid";
+
+//$sql = "SELECT * FROM brand JOIN vehicle ON brand.brand_id = vehicle.brand_id WHERE vehicle.veh_ID =:vhid"; 
+//$sql2 = "SELECT STATUS FROM vehicle_status WHERE veh_ID =:vhid";
+$sql = "SELECT * FROM vehicle_status
+JOIN vehicle ON vehicle.veh_ID = vehicle_status.veh_ID
+JOIN brand ON brand.brand_ID = vehicle.brand_ID
+WHERE vehicle_status.veh_ID =:vhid";
+
 $query = $dbh -> prepare($sql);
 $query->bindParam(':vhid',$vhid, PDO::PARAM_STR);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
 $cnt=1;
+
 if($query->rowCount() > 0)
 {
 foreach($results as $result)
 {    
 ?>  
 </section>
-<!--Listing-detail-->  
-<li><i class="fa fa-user" aria-hidden="true"></i><?php echo htmlentities($result->cust_ID);?> seats</li>         
+<!--Listing-detail-->          
 <section class="listing-detail">
+  
   <div class="container">  
     <div class="listing_detail_head row">
       <div class="col-md-9">
-        <h2><?php echo htmlentities($result->veh_Brand);?> , <?php echo htmlentities($result->veh_Model);?></h2>
+        <h2><?php echo htmlentities($result->brand_Name);?> , <?php echo htmlentities($result->veh_Model);?></h2>
         <div class="product-listing-m gray-bg">
           <div class="product-listing-img"><img src="assets/images/<?php echo htmlentities($result->veh_Image_1);?> "class="img-responsive" alt="Image" /> </a> 
           <div class="col-md-3">
@@ -124,8 +131,8 @@ foreach($results as $result)
           <ul>
           
             <li> <i class="fa fa-calendar" aria-hidden="true"></i>
-              <h5><?php echo htmlentities($result->manufacture_Year);?></h5>
-              <p>Reg.Year</p>
+              <h5><?php echo htmlentities($result->status);?></h5>
+              <p>Status</p>            
             </li>
             <li> <i class="fa fa-cogs" aria-hidden="true"></i>
               <h5><?php echo htmlentities($result->fuel_Type);?></h5>
