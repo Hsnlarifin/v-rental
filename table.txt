@@ -1,0 +1,36 @@
+CREATE TABLE `supplier` (
+  `sup_id` int(11)  NOT NULL AUTO_INCREMENT,
+  `sup_name` varchar(25) NOT NULL,
+  `sup_email` varchar(50) DEFAULT NULL,
+  `sup_phone` varchar(15) NOT NULL,
+  `username` varchar(20) NOT NULL,
+  `password` varchar(20) NOT NULL,
+  `company_name` varchar(100) DEFAULT NULL,
+  `address` varchar(100) DEFAULT NULL,
+CONSTRAINT VEHICLE_PK PRIMARY KEY (sup_id));
+
+CREATE TABLE `vehicle` (
+  `veh_ID` int(10)  NOT NULL AUTO_INCREMENT,
+  `veh_Brand` varchar(255)  NOT NULL,
+  `veh_Colour` varchar(255)  NOT NULL,
+  `sup_id` int(10) NOT NULL,
+CONSTRAINT VEHICLE_PK PRIMARY KEY (veh_ID),
+CONSTRAINT VEHICLE_FK FOREIGN KEY (sup_id) REFERENCES supplier(sup_id));
+
+CREATE TABLE `condition` (
+  `con_ID` int(10)  NOT NULL AUTO_INCREMENT,
+  `con_type` varchar(255)  NOT NULL,
+CONSTRAINT CONDITION_PK PRIMARY KEY (con_ID));
+
+CREATE TABLE `Vehicle_Supplier`(
+`veh_ID` int(10) NOT NULL,
+`sup_id` int(11) NOT NULL,
+`condition_type`varchar(255) NOT NULL,
+`price` double NOT NULL,
+`add_date` date NOT NULL,
+`total_price` double NOT NULL,
+`quantity` int(10) NOT NULL,
+
+PRIMARY KEY (veh_ID,sup_id),
+CONSTRAINT VEHICLE_SUPPLIER_FK FOREIGN KEY(veh_ID) REFERENCES VEHICLE(veh_ID),
+CONSTRAINT VEHICLE_SUP_FK FOREIGN KEY (sup_id) REFERENCES	Supplier(sup_id));

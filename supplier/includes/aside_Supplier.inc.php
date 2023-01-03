@@ -3,11 +3,13 @@
 <td id="td_aside">
 
 <aside>
-	<a href="../manufacturer/edit_profile.php">Edit Profile</a><!--
-	--><a href="../manufacturer/add_product.php">Add Products</a><!--
-	--><a href="../manufacturer/manage_stock.php">Manage Stock</a><!--
-	--><a href="../manufacturer/view_unit.php">Manage Unit</a><!--
-	--><a href="../manufacturer/view_category.php">Manage Category</a>
+	<a href="../manufacturer/editProfile.php">Edit Profile</a>
+	<a href="../manufacturer/add_veh.php">Add Vehicle</a>
+	<a href="../manufacturer/edit_veh.php">Edit Vehicle</a>
+	<a href="../manufacturer/view_veh.php">View Vehicle</a>
+	<a href="../manufacturer/deleteVeh.php">Delete Vehicle</a>
+	
+	
 </aside>
 
 </td>

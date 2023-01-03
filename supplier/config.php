@@ -3,11 +3,12 @@
 $sname = "localhost";
 $uname = "root";
 $password = "";
-
 $db_name = "veh_rental";
 
-$conn = mysqli_connect($sname,$uname,$password,$db_name);
+$conn = new mysqli($sname,$uname,$password,$db_name);
 
-if(!$conn){
-	echo "Connection failed!";
+if($conn->connect_error){
+	die("Connection failed: " . $conn->connect_error);
 }
+
+?>

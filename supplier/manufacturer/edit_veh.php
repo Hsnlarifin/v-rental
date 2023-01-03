@@ -1,52 +1,46 @@
 <?php
-	include("../includes/config.php");
-	include("../includes/validate_data.php");
+	include("../config.php");
+	
 	session_start();
-	if(isset($_SESSION['Supplier_login'])) {
-		if($_SESSION['Supplier_login'] == true) {
-			$id = $_GET['id'];
-			$query_selectVehicleDetails = "SELECT * FROM Vehicle WHERE veh_ID='$ID'";
-			$result_selectVehicleDetails = mysqli_query($con,$query_selectVehicleDetails);
-			$row_selectVehicleDetails = mysqli_fetch_array($result_selectVehicleDetails);
-			$VehicleName = $VehicleDetails = "";
-			$VehicleNameErr = $requireErr = $confirmMessage = "";
-			$VehicleNameHolder = $VehicleDetailsHolder = "";
-			if($_SERVER['REQUEST_METHOD'] == "POST") {
-				if(!empty($_POST['txtVehicleName'])) {
-					$VehicleNameHolder = $_POST['txtVehicleName'];
-					$VehicleName = $_POST['txtVehicleName'];
-				}
-				if(!empty($_POST['txtVehicleDetails'])) {
-					$VehicleDetails = $_POST['txtVehicleDetails'];
-					$VehicleDetailsHolder = $_POST['txtVehicleDetails'];
-				}
-				if($VehicleName != null) {
-					$query_UpdateVehicle = "UPDATE Vehicle SET veh_name='$VehicleName',cat_details='$VehicleDetails' WHERE cat_id='$id'";
-					if(mysqli_query($con,$query_UpdateVehicle)) {
-						echo "<script> alert(\"Vehicle Updated Successfully\"); </script>";
-						header('Refresh:0;url=view_Vehicle.php');
-					}
-					else {
-						$requireErr = "Updating New Vehicle Failed";
-					}
-				}
-				else {
-					$requireErr = "* Valid Vehicle Name is required";
-				}
-			}
-		}
+	if(isset($_SESSION['sup_id'])) {
+	
+			$sup_id = $_SESSION["sup_id"];
+}
 		else {
-			header('Location:../index.php');
+			header('Location:../dashboard.php');
 		}
+
+			$query = "SELECT * FROM vehicle WHERE sup_id='$sup_id'";
+			$result = mysqli_query($conn,$query);
+			$row = mysqli_fetch_array($result);
+			
+			if($_SERVER['REQUEST_METHOD'] == "POST") {
+				
+			$veh_Brand = $_POST['veh_Brand'];
+			$veh_Colour = $_POST['veh_Colour'];
+			
+
+			$qry = "UPDATE vehicle SET veh_Brand='$veh_Brand',veh_Colour='$veh_Colour' WHERE sup_id='$sup_id'";
+	        $ret = mysqli_query($conn,$qry);
+	
+	if($ret)
+	{
+		echo "<script>alert('Update successfully');</script>";
+		echo"<meta http-equiv='refresh' content='0; url=dashboard.php'/>";
 	}
-	else {
-		header('Location:../index.php');
+	else
+	{
+		echo "Failed: " .mysqli_error($conn);
 	}
+			
+		
+	}
+	
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-	<title> Update Vehicle </title>
+	<title> Edit Vehicle </title>
 	<link rel="stylesheet" href="../includes/main_style.css" >
 </head>
 <body>
@@ -60,15 +54,23 @@
 		<form action="" method="POST" class="form">
 		<ul class="form-list">
 		<li>
-			<div class="label-block"> <label for="VehicleName">Vehicle Name</label> </div>
-			<div class="input-box"> <input type="text" id="VehicleName" name="txtVehicleName" placeholder="Vehicle Name" value="<?php echo $row_selectVehicleDetails['cat_name']; ?>" required /> </div> <span class="error_message"><?php echo $VehicleNameErr; ?></span>
+			<div class="label-block"> 
+				<label for="VehicleBrand">Vehicle Brand</label> 
+			</div>
+			<div class="input-box">
+			 <input type="text" Brand="veh_Brand" placeholder="Vehicle Brand" required /> 
+			</div> 
 		</li>
 		<li>
-			<div class="label-block"> <label for="VehicleDetails">Details</label> </div>
-			<div class="input-box"><textarea id="VehicleDetails" name="txtVehicleDetails" placeholder="Details"><?php echo $row_selectVehicleDetails['cat_details']; ?></textarea> </div>
+			<div class="label-block"> 
+				<label for="VehicleColour">Colour</label> 
+			</div>
+			<div class="input-box">
+			<input type="text" Colour="veh_Colour" placeholder="Vehicle Colour"  required /> 
+			</div> 
 		</li>
 		<li>
-			<input type="submit" value="Update Vehicle" class="submit_button" /> <span class="error_message"> <?php echo $requireErr; ?> </span><span class="confirm_message"> <?php echo $confirmMessage; ?> </span>
+			<input type="submit" value="Update Vehicle" class="submit_button" /> 
 		</li>
 		</ul>
 		</form>
