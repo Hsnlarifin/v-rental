@@ -11,10 +11,13 @@ $fromdate=$_POST['fromdate'];
 $todate=$_POST['todate']; 
 //$message=$_POST['message'];
 $username=$_SESSION['login'];
-$custid=$_SESSION['login'];
+$custid=$_SESSION['customer'];
 $status='PENDING';
 $vhid=$_GET['vhid'];
-$bookingkey=mt_rand(100000000, 999999999);
+$bookingkey=mt_rand(1000, 9999);
+
+//
+
 $ret="SELECT * FROM reservation where (:fromdate BETWEEN date(from_Date) and date(to_Date) || :todate BETWEEN date(from_Date) and date(to_Date) || date(from_Date) BETWEEN :fromdate and :todate) and veh_ID=:vhid";
 $query1 = $dbh -> prepare($ret);
 $query1->bindParam(':vhid',$vhid, PDO::PARAM_STR);
@@ -23,6 +26,8 @@ $query1->bindParam(':todate',$todate,PDO::PARAM_STR);
 $query1->execute();
 $results1=$query1->fetchAll(PDO::FETCH_OBJ);
 
+
+//make trigger for insert status auto pending
 
 if($query1->rowCount()==0)
 {
@@ -39,7 +44,7 @@ $query->execute();
 $lastInsertId = $dbh->lastInsertId();
 if($lastInsertId)
 {
-echo "<script>alert('Booking successfull.');</script>";
+echo "<script>alert('Booking successful.');</script>";
 echo "<script type='text/javascript'> document.location = 'my-booking.php'; </script>";
 }
 else 
@@ -75,7 +80,6 @@ echo "<script>alert('Something went wrong. Please try again');</script>";
 <!--FontAwesome Font Style -->
 <link href="assets/css/font-awesome.min.css" rel="stylesheet">
 
-<!-- SWITCHER -->
 <link rel="apple-touch-icon-precomposed" href="assets/images/favicon-icon/apple-touch-icon-57-precomposed.png">
 <link rel="shortcut icon" href="images/tab_icon.png">
 <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
@@ -91,6 +95,9 @@ $vhid=intval($_GET['vhid']);
 
 //$sql = "SELECT * FROM brand JOIN vehicle ON brand.brand_id = vehicle.brand_id WHERE vehicle.veh_ID =:vhid"; 
 //$sql2 = "SELECT STATUS FROM vehicle_status WHERE veh_ID =:vhid";
+
+//JOIN QUERY
+
 $sql = "SELECT * FROM vehicle_status
 JOIN vehicle ON vehicle.veh_ID = vehicle_status.veh_ID
 JOIN brand ON brand.brand_ID = vehicle.brand_ID

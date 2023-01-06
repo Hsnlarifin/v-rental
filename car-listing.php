@@ -75,7 +75,9 @@ error_reporting(0);
 </div>
 
 <?php 
+
 // Join query
+
 $sql = "SELECT vehicle.*,brand.brand_Name,brand.brand_ID as bid  from vehicle join brand on brand.brand_ID= vehicle.brand_ID";
 $query = $dbh -> prepare($sql);
 $query->execute();
@@ -150,7 +152,9 @@ foreach($results as $result)
           </div>
           <div class="recent_addedcars">
             <ul>
+
 <?php $sql = "SELECT vehicle.*,brand.brand_Name,brand.brand_ID as bid  from vehicle join brand on brand.brand_ID = vehicle.brand_ID order by brand_ID desc limit 1";
+
 $query = $dbh -> prepare($sql);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
@@ -202,8 +206,7 @@ foreach($results as $result)
 <script src="assets/js/jquery.min.js"></script>
 <script src="assets/js/bootstrap.min.js"></script> 
 <script src="assets/js/interface.js"></script> 
-<!--Switcher-->
-<script src="assets/switcher/js/switcher.js"></script>
+
 <!--bootstrap-slider-JS--> 
 <script src="assets/js/bootstrap-slider.min.js"></script> 
 <!--Slider-JS--> 

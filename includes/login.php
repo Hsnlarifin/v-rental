@@ -3,20 +3,24 @@
 if(isset($_POST['login']))
 {
 $username=$_POST['username'];
-$password=md5($_POST['password']);
-$custid=$_POST['custid'];
+//$password=md5($_POST['password']);
+$password=($_POST['password']);
 $sql ="SELECT cust_Username,cust_Pass,user_ID,cust_ID FROM customer WHERE cust_Username=:username AND cust_Pass=:password";
+
 $query= $dbh -> prepare($sql);
 $query-> bindParam(':username', $username, PDO::PARAM_STR);
 $query-> bindParam(':password', $password, PDO::PARAM_STR);
-$query-> bindParam(':custid', $custid, PDO::PARAM_STR);
-$query-> bindParam(':userid', $result['user_ID'], PDO::PARAM_STR);
+
 $query-> execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
+$_SESSION['customer'] = $results[0]->cust_ID;
+
 if($query->rowCount() > 0)
 {
 $_SESSION['login']=$_POST['username'];
-$_SESSION['firstname']=$results->FullName;
+
+//$_SESSION['customer']= htmlentities($result->cust_ID);
+//$_SESSION['userid']=$results->user_ID;
 $currentpage=$_SERVER['REQUEST_URI'];
 echo "<script type='text/javascript'> document.location = '$currentpage'; </script>";
 } else{

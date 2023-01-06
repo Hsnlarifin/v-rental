@@ -8,15 +8,15 @@
         </div>
         <div class="col-sm-9 col-md-10">
           <div class="header_info">
-               
+           
           <?php   if(strlen($_SESSION['login'])==0)
 	{	
 ?>
  <div class="login_btn"> <a href="#loginform" class="btn btn-s uppercase" data-toggle="modal" data-dismiss="modal">LOGIN</a> </div>
 <?php }
-else{ 
+else{
 
-echo "Welcome!";
+echo "Welcome to V-Rental";
 
  } ?>
           </div>
@@ -39,24 +39,26 @@ echo "Welcome!";
 <?php 
 
 $username=$_SESSION['login'];
-//selection,project,sub-query
 
-$sql = "SELECT f_name FROM user WHERE user_ID = (
-    SELECT user_ID
+
+//SUB-QUERY 
+
+$sql = "SELECT * FROM user WHERE user_ID = 
+   (SELECT user_ID
     FROM customer
     WHERE cust_Username = :username)";
 
-//$sql ="SELECT user_ID FROM customer WHERE cust_Username=:username";
 $query= $dbh -> prepare($sql);
 $query-> bindParam(':username', $username, PDO::PARAM_STR);
 $query-> execute();
+
 $results=$query->fetchAll(PDO::FETCH_OBJ);
 if($query->rowCount() > 0)
 {
 foreach($results as $result)
 	{
-
-	 echo htmlentities($result->FullName); }}
+    
+	 echo htmlentities($result->f_name); }}
    ?>
    <i class="fa fa-angle-down" aria-hidden="true"></i></a>
               <ul class="dropdown-menu">
