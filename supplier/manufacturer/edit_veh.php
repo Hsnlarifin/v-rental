@@ -28,7 +28,7 @@
 			$veh_Image = $_FILES['veh_Image']['tmp_name'];
 			
 
-			$qry = "UPDATE vehicle SET veh_Model='$veh_Model',fuel_type ='$fuel_type',veh_Colour='$veh_Colour',seating_Capacity = '$seating_Capacity',veh_Transmission = '$veh_Transmission',veh_plateNo = '$veh_plateNo',veh_Image='$veh_Image'WHERE veh_ID='$veh_ID'";
+			$qry = "UPDATE vehicle SET veh_Model='$veh_Model',fuel_type ='$fuel_type',veh_Colour='$veh_Colour',seating_Capacity = '$seating_Capacity',veh_Transmission = '$veh_Transmission',veh_plateNo = '$veh_plateNo',veh_Image='$image'WHERE veh_ID='$veh_ID'";
 	        $ret = mysqli_query($conn,$qry);
 	
 	if($ret)
