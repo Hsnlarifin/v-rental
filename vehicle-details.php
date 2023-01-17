@@ -213,6 +213,7 @@ foreach($results as $result)
             <h5 style="color:red"><?php echo htmlentities($result->status);?></h5>
 
             <?php } ?>
+            
               <p>Status</p>            
             </li>
             <li> <i class="fa fa-cogs" aria-hidden="true"></i>

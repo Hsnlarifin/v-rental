@@ -10,26 +10,14 @@ else{
 
 if(isset($_POST['submit']))
   {
-$vehicletitle=$_POST['vehicletitle'];
+$vehmodel=$_POST['vehiclemodel'];
 $brand=$_POST['brandname'];
 $vehicleoverview=$_POST['vehicalorcview'];
 $priceperday=$_POST['priceperday'];
 $fueltype=$_POST['fueltype'];
-$modelyear=$_POST['modelyear'];
 $seatingcapacity=$_POST['seatingcapacity'];
-$airconditioner=$_POST['airconditioner'];
-$powerdoorlocks=$_POST['powerdoorlocks'];
-$antilockbrakingsys=$_POST['antilockbrakingsys'];
-$brakeassist=$_POST['brakeassist'];
-$powersteering=$_POST['powersteering'];
-$driverairbag=$_POST['driverairbag'];
-$passengerairbag=$_POST['passengerairbag'];
-$powerwindow=$_POST['powerwindow'];
-$cdplayer=$_POST['cdplayer'];
-$centrallocking=$_POST['centrallocking'];
-$crashcensor=$_POST['crashcensor'];
-$leatherseats=$_POST['leatherseats'];
-$id=intval($_GET['id']);
+
+$id=intval($_GET['vhid']);
 
 $sql="update tblvehicles set VehiclesTitle=:vehicletitle,VehiclesBrand=:brand,VehiclesOverview=:vehicleoverview,PricePerDay=:priceperday,FuelType=:fueltype,ModelYear=:modelyear,SeatingCapacity=:seatingcapacity,AirConditioner=:airconditioner,PowerDoorLocks=:powerdoorlocks,AntiLockBrakingSystem=:antilockbrakingsys,BrakeAssist=:brakeassist,PowerSteering=:powersteering,DriverAirbag=:driverairbag,PassengerAirbag=:passengerairbag,PowerWindows=:powerwindow,CDPlayer=:cdplayer,CentralLocking=:centrallocking,CrashSensor=:crashcensor,LeatherSeats=:leatherseats where id=:id ";
 $query = $dbh->prepare($sql);
@@ -38,21 +26,8 @@ $query->bindParam(':brand',$brand,PDO::PARAM_STR);
 $query->bindParam(':vehicleoverview',$vehicleoverview,PDO::PARAM_STR);
 $query->bindParam(':priceperday',$priceperday,PDO::PARAM_STR);
 $query->bindParam(':fueltype',$fueltype,PDO::PARAM_STR);
-$query->bindParam(':modelyear',$modelyear,PDO::PARAM_STR);
 $query->bindParam(':seatingcapacity',$seatingcapacity,PDO::PARAM_STR);
-$query->bindParam(':airconditioner',$airconditioner,PDO::PARAM_STR);
-$query->bindParam(':powerdoorlocks',$powerdoorlocks,PDO::PARAM_STR);
-$query->bindParam(':antilockbrakingsys',$antilockbrakingsys,PDO::PARAM_STR);
-$query->bindParam(':brakeassist',$brakeassist,PDO::PARAM_STR);
-$query->bindParam(':powersteering',$powersteering,PDO::PARAM_STR);
-$query->bindParam(':driverairbag',$driverairbag,PDO::PARAM_STR);
-$query->bindParam(':passengerairbag',$passengerairbag,PDO::PARAM_STR);
-$query->bindParam(':powerwindow',$powerwindow,PDO::PARAM_STR);
-$query->bindParam(':cdplayer',$cdplayer,PDO::PARAM_STR);
-$query->bindParam(':centrallocking',$centrallocking,PDO::PARAM_STR);
-$query->bindParam(':crashcensor',$crashcensor,PDO::PARAM_STR);
-$query->bindParam(':leatherseats',$leatherseats,PDO::PARAM_STR);
-$query->bindParam(':id',$id,PDO::PARAM_STR);
+
 $query->execute();
 
 $msg="Data updated successfully";
@@ -73,7 +48,7 @@ $msg="Data updated successfully";
 	<meta name="author" content="">
 	<meta name="theme-color" content="#3e454c">
 	
-	<title>Car Rental Portal | Admin Edit Vehicle Info</title>
+	<title>V-Rental | Admin Edit Vehicle Info</title>
 
 	<!-- Font awesome -->
 	<link rel="stylesheet" href="css/font-awesome.min.css">
@@ -130,10 +105,10 @@ $msg="Data updated successfully";
 									<div class="panel-body">
 <?php if($msg){?><div class="succWrap"><strong>SUCCESS</strong>:<?php echo htmlentities($msg); ?> </div><?php } ?>
 <?php 
-$id=intval($_GET['id']);
-$sql ="SELECT tblvehicles.*,tblbrands.BrandName,tblbrands.id as bid from tblvehicles join tblbrands on tblbrands.id=tblvehicles.VehiclesBrand where tblvehicles.id=:id";
+$vhid=intval($_GET['vhid']);
+$sql ="SELECT vehicle.*,brand.brand_Name,brand.brand_ID as brandid from vehicle join brand on brand.brand_ID=vehicle.brand_ID where vehicle.veh_ID=:vhid";
 $query = $dbh -> prepare($sql);
-$query-> bindParam(':id', $id, PDO::PARAM_STR);
+$query-> bindParam(':vhid', $vhid, PDO::PARAM_STR);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
 $cnt=1;
@@ -144,15 +119,17 @@ foreach($results as $result)
 
 <form method="post" class="form-horizontal" enctype="multipart/form-data">
 <div class="form-group">
-<label class="col-sm-2 control-label">Vehicle Title<span style="color:red">*</span></label>
+<label class="col-sm-2 control-label">Vehicle Model<span style="color:red">*</span></label>
 <div class="col-sm-4">
-<input type="text" name="vehicletitle" class="form-control" value="<?php echo htmlentities($result->VehiclesTitle)?>" required>
+<input type="text" name="vehicletitle" class="form-control" value="<?php echo htmlentities($result->veh_Model)?>" required>
 </div>
 <label class="col-sm-2 control-label">Select Brand<span style="color:red">*</span></label>
 <div class="col-sm-4">
 <select class="selectpicker" name="brandname" required>
-<option value="<?php echo htmlentities($result->bid);?>"><?php echo htmlentities($bdname=$result->BrandName); ?> </option>
-<?php $ret="select id,BrandName from tblbrands";
+<option value="<?php echo htmlentities($result->brand_ID);?>"><?php echo htmlentities($bdname=$result->brand_Name); ?> </option>
+
+<?php $ret="select brand_ID,brand_Name from brand";
+
 $query= $dbh -> prepare($ret);
 //$query->bindParam(':id',$id, PDO::PARAM_STR);
 $query-> execute();
@@ -161,12 +138,12 @@ if($query -> rowCount() > 0)
 {
 foreach($resultss as $results)
 {
-if($results->BrandName==$bdname)
+if($results->brand_Name==$bdname)
 {
 continue;
 } else{
 ?>
-<option value="<?php echo htmlentities($results->id);?>"><?php echo htmlentities($results->BrandName);?></option>
+<option value="<?php echo htmlentities($results->brand_ID);?>"><?php echo htmlentities($results->brand_Name);?></option>
 <?php }}} ?>
 
 </select>
@@ -175,7 +152,7 @@ continue;
 											
 <div class="hr-dashed"></div>
 <div class="form-group">
-<label class="col-sm-2 control-label">Vehical Overview<span style="color:red">*</span></label>
+<label class="col-sm-2 control-label">Vehicle Overview<span style="color:red">*</span></label>
 <div class="col-sm-10">
 <textarea class="form-control" name="vehicalorcview" rows="3" required><?php echo htmlentities($result->VehiclesOverview);?></textarea>
 </div>
