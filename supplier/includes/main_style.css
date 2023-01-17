@@ -4,7 +4,7 @@
 	padding:0px;
 }
 body {
-	width:1200px;
+	width:1400px;
 	margin:auto;
 	border:2px solid #009688;
 }
@@ -135,7 +135,7 @@ nav a:hover {
 #td_aside {
 	background-color:#EEEEEE;
 	vertical-align:top;
-	width:200px;
+	width:1000px;
 	border-right:2px solid #ccc;
 }
 aside a {
@@ -184,9 +184,16 @@ table {
 }
 .table_displayData td, .table_displayData th {
 	border:1px solid #ddd;
+	border-style: dashed;
+	border-width: medium;
 	padding: 8px 10px;
 	text-align: left;
+
 }
+
+
+tr:nth-child(even) {background-color: #f0ebeb;}
+
 .table_displayData th {
 	background-color:#eee;
 	color:#333;

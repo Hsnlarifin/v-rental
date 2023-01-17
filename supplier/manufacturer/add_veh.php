@@ -25,9 +25,11 @@ if(isset($_POST['submit']))
 	$seating_Capacity = $_POST['seating_Capacity'];
 	$veh_Transmission = $_POST['veh_Transmission'];
 	$veh_plateNo = $_POST['veh_plateNo'];
-	$veh_Image = $_FILES['image']['tmp_name'];
+    //$veh_Image_1 = $_FILES['image']['name'];
+	//$veh_Image_1_temp = $_FILES['image']['tmp_name'];
+	//$targetPath = "images/".$veh_Image_1;
 
-	$image = addslashes(file_get_contents($veh_Image));
+	//$image = addslashes(file_get_contents($veh_Image_1));
                 
 
 	$quey = "SELECT brand_ID,brand_Name FROM Brand WHERE brand_Name ='$brand_Name'";
@@ -42,12 +44,23 @@ if(isset($_POST['submit']))
 		}
 
 
-		$qry = "INSERT INTO Vehicle (veh_Model,fuel_type,veh_Colour,seating_Capacity,veh_Transmission,veh_plateNo,veh_Image,brand_ID) VALUES ('$veh_Model','$fuel_type','$veh_Colour','$seating_Capacity','$veh_Transmission','$veh_plateNo','$image','$brand_ID') ";
+		$qry = "INSERT INTO Vehicle (veh_Model,fuel_type,veh_Colour,seating_Capacity,veh_Transmission,veh_plateNo,brand_ID) VALUES ('$veh_Model','$fuel_type','$veh_Colour','$seating_Capacity','$veh_Transmission','$veh_plateNo','$brand_ID') ";
 		
 		if(mysqli_query($conn,$qry)) {
-			echo "<script> alert(\"Vehicle Added Successfully\"); </script>";
+			echo "<script> alert(\"Vehicle Details Added Successfully\"); </script>";
+
+			$veh_Image_1 = $_FILES['image']['name'];
+			$veh_Image_1_temp = $_FILES['image']['tmp_name'];
+			$targetPath = "images/".$veh_Image_1;
+
+			$sql="INSERT INTO Vehicle (veh_Image_1) VALUES ('$image');";
+			$result = mysqli_query($conn,$sql);
 		}
-	}
+
+			
+				
+		
+	
 	else{
 
 		$insert_brand ="INSERT INTO brand (brand_Name, add_Date) VALUES ('$brand_Name', sysdate())";
@@ -63,14 +76,23 @@ if(isset($_POST['submit']))
 			$brand_ID = $row['brand_ID'];
 		}
 
-		$qry = "INSERT INTO Vehicle (veh_Model,fuel_type,veh_Colour,seating_Capacity,veh_Transmission,veh_plateNo,veh_Image,brand_ID) VALUES ('$veh_Model','$fuel_type','$veh_Colour','$seating_Capacity','$veh_Transmission','$veh_plateNo','$image','$brand_ID') ";
+		$qry = "INSERT INTO Vehicle (veh_Model,fuel_type,veh_Colour,seating_Capacity,veh_Transmission,veh_plateNo,brand_ID) VALUES ('$veh_Model','$fuel_type','$veh_Colour','$seating_Capacity','$veh_Transmission','$veh_plateNo','$brand_ID') ";
 		
 		if(mysqli_query($conn,$qry)) {
 			echo "<script> alert(\"Vehicle Added Successfully\"); </script>";
+
 							
 		}
-	}
 
+			$veh_Image_1 = $_FILES['image']['name'];
+			$veh_Image_1_temp = $_FILES['image']['tmp_name'];
+			$targetPath = "images/".$veh_Image_1;
+
+			$sql="INSERT INTO Vehicle (veh_Image_1) VALUES ('$image');";
+			$result = mysqli_query($conn,$sql);
+				echo "<script> alert('Vehicle Image Added Successfully'); </script>";
+		
+	}
 
 	$condition_type = $_POST['condition_type'];
 	$policy_no = $_POST['policy_no'];
@@ -95,7 +117,7 @@ if(isset($_POST['submit']))
 
 
 		  echo "<script>alert('Add Successfully! ');</script>";
-		  echo"<meta http-equiv='' content='0; url=view_veh.php'/>";
+		  echo"<meta http-equiv='refresh' content='0; url=view_veh.php'/>";
 
 	//} 
 	//else 
@@ -105,9 +127,10 @@ if(isset($_POST['submit']))
 	//	  echo"<meta http-equiv='refresh' content='0; url=add_veh.php'/>";
 	//}
 
+		}
 
+	}
 
-}
 	
 ?>
 <!DOCTYPE html>

@@ -50,7 +50,7 @@
 	<section>
 		<h1>View Vehicle</h1>
 		<form action="" method="POST" class="form" enctype="multipart/form-data">
-		<table class="table_displayData">
+		<table class="table_displayData" >
 			<tr>
 				<!-- <th> <input type="checkbox" onClick="toggle(this)" /> </th> -->
 				<th> No.</th>
@@ -79,12 +79,16 @@
 				<td> <?php echo $row_selectVehicle['seating_Capacity']; ?> </td>
 				<td> <?php echo $row_selectVehicle['veh_Transmission']; ?> </td>
 				<td> <?php echo $row_selectVehicle['veh_plateNo']; ?> </td>
-				<td> upload/<?php echo '<img src="data:image/jpeg;base64,'.base64_encode($row_selectVehicle['veh_Image_1']).'""/>' ;?> </td>
 				
+				<td><img src="images/<?php echo $row_selectVehicle['veh_Image_1'] ;?>" ></td>
+
 				<td> <a href="edit_veh.php?veh_ID=<?php echo $row_selectVehicle['veh_ID']; ?>"><img src="../images/edit.png" alt="edit" /></a> </td>
 
-			</tr>
+			
+				
 			<?php $i++; 
+		
+	
 		} ?>
 		</table>
 		

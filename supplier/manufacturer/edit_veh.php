@@ -14,6 +14,8 @@
 			$veh_ID = $_GET['veh_ID'];
 
 			$query = "SELECT * FROM vehicle WHERE veh_ID='$veh_ID'";
+
+
 			$result = mysqli_query($conn,$query);
 			$row = mysqli_fetch_array($result);
 			
@@ -25,11 +27,23 @@
 			$seating_Capacity = $_POST['seating_Capacity'];
 			$veh_Transmission = $_POST['veh_Transmission'];
 			$veh_plateNo = $_POST['veh_plateNo'];
-			$veh_Image = $_FILES['veh_Image']['tmp_name'];
+			//$veh_Image_1 = $_FILES['veh_Image_1']['name'];
+			//$veh_Image_1_temp = $_FILES['veh_Image_1']['tmp_name'];
+			//$folder = "images/".$veh_Image_1;
+			
+			//$image = addslashes(file_get_contents($veh_Image));
 			
 
-			$qry = "UPDATE vehicle SET veh_Model='$veh_Model',fuel_type ='$fuel_type',veh_Colour='$veh_Colour',seating_Capacity = '$seating_Capacity',veh_Transmission = '$veh_Transmission',veh_plateNo = '$veh_plateNo',veh_Image='$image'WHERE veh_ID='$veh_ID'";
+			$qry = "UPDATE vehicle SET veh_Model='$veh_Model',fuel_type ='$fuel_type',veh_Colour='$veh_Colour',seating_Capacity = '$seating_Capacity',veh_Transmission = '$veh_Transmission',veh_plateNo = '$veh_plateNo'WHERE veh_ID='$veh_ID'";
 	        $ret = mysqli_query($conn,$qry);
+
+	        $veh_Image_1 = $_FILES['veh_Image_1']['name'];
+			$veh_Image_1_temp = $_FILES['veh_Image_1']['tmp_name'];
+			$folder = "images/".$veh_Image_1;
+
+			$sql="UPDATE Vehicle SET veh_Image_1 ='$veh_Image_1'WHERE veh_ID='$veh_ID'";
+			$result = mysqli_query($conn,$sql);
+				echo "<script> alert('Vehicle Image Added Successfully'); </script>";
 	
 	if($ret)
 	{
@@ -117,7 +131,7 @@
 
 		<li>
 		<label for="image" class=" control-label">New Image</label>
- 		<input type = "file" name="veh_Image" accept ="image/jpg , image/jpeg,image/png"><br><br>
+ 		<input type = "file" name="veh_Image_1" accept ="image/jpg , image/jpeg,image/png"><br><br>
 		</li>
 
 
