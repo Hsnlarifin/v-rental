@@ -53,5 +53,36 @@ CONSTRAINT VEHICLE_RECORD_PK PRIMARY KEY (red_id),
 CONSTRAINT VEHICLE_SUPPLIER_FK FOREIGN KEY(veh_ID) REFERENCES VEHICLE(veh_ID),
 CONSTRAINT VEHICLE_SUP_FK FOREIGN KEY (sup_id) REFERENCES Supplier(sup_id));
 
+INSERT INTO supplier VALUES ('1001','john','john@gmail.com','0123456789','john','1234','john & james co.','18 Taman Ria');
+INSERT INTO supplier VALUES ('1002','james','james@yahoo.com','0123456780','james','12345',' james co.','11 jalan mas');
+
+INSERT INTO brand VALUES ('1','BMW','');
+INSERT INTO brand VALUES ('2','Produa','');
+INSERT INTO brand VALUES ('3','Honda','');
+INSERT INTO brand VALUES ('4','Nissan','');
+INSERT INTO brand VALUES ('5','Toyota','');
+INSERT INTO brand VALUES ('6','Jaguar','');
+INSERT INTO brand VALUES ('7','Audi','');
+INSERT INTO brand VALUES ('8','Proton','');
+INSERT INTO brand VALUES ('9','Volkswagen','');
+INSERT INTO brand VALUES ('10','Lexus','');
+
+
+INSERT INTO vehicle VALUES('5','530i',NULL,'Ron 97','BLACK','5','automatic','BMW 1','','1');
+INSERT INTO vehicle VALUES('8','Civic',NULL,'Ron 97','BLACK','5','automatic','Honda 1','','3');
+INSERT INTO vehicle VALUES('15','vios',NULL,'Ron 95','WHITE','5','automatic','Vios 1','','5');
+INSERT INTO vehicle VALUES('16','F-Type',NULL,'Ron 97','BLACK','2','automatic','Jaguar 112','','6');
+INSERT INTO vehicle VALUES('17','A7',NULL,'Ron 97','WHITE','5','automatic','Audi 1','','7');
+INSERT INTO vehicle VALUES('18','VIOS',NULL,'Ron 95','YELLOW','2','automatic','Toyota 123','','5');
+INSERT INTO vehicle VALUES('19','Alza',NULL,'Ron 95','RED','5','automatic','Alza 1','','2');
+INSERT INTO vehicle VALUES('21','X50',NULL,'Ron 95','BLUE','5','automatic','X50','','8');
+INSERT INTO vehicle VALUES('23','X70',NULL,'Ron 97','BROWN','5','automatic','X 71','','8');
+INSERT INTO vehicle VALUES('25','Almera',NULL,'Ron 95','WHITE','5','automatic CVT','Nissan 1','','4');
+INSERT INTO vehicle VALUES('24','R8',NULL,'Ron 97','WHITE','2','automatic','R8','','7');
+INSERT INTO vehicle VALUES('26','City',NULL,'Ron 95','WHITE','5','automatic CVT/E-CVT','City 1','','3');
+INSERT INTO vehicle VALUES('28','LS',NULL,'Ron 97','SLIVER','5','AT','LEX 1','','10');
+INSERT INTO vehicle VALUES('27','Arteon',NULL,'Ron 97','BLUE','5','DCT','VKG 1','','9');
+
+
 
 
