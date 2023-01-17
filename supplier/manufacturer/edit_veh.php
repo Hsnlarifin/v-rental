@@ -48,7 +48,7 @@
 	if($ret)
 	{
 		echo "<script>alert('Update successfully');</script>";
-		echo"<meta http-equiv='' content='0; url=view_veh.php'/>";
+		echo"<meta http-equiv='refresh' content='0; url=view_veh.php'/>";
 	}
 	else
 	{

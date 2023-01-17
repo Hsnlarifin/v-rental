@@ -80,7 +80,7 @@
 				<td> <?php echo $row_selectVehicle['veh_Transmission']; ?> </td>
 				<td> <?php echo $row_selectVehicle['veh_plateNo']; ?> </td>
 				
-				<td><img src="images/<?php echo $row_selectVehicle['veh_Image_1'] ;?>" ></td>
+				<td> <img src="../images/<?php echo $row_selectVehicle['veh_Image_1'];?> "></td>
 
 				<td> <a href="edit_veh.php?veh_ID=<?php echo $row_selectVehicle['veh_ID']; ?>"><img src="../images/edit.png" alt="edit" /></a> </td>
 
