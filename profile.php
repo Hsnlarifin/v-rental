@@ -179,7 +179,7 @@ foreach($results as $result)
             </div>
             <div class="form-group">
               <label class="control-label">Street Address</label>
-              <textarea class="form-control white_bg" name="address" rows="4" ><?php echo htmlentities($result->Street);?></textarea>
+              <textarea class="form-control white_bg" name="address" rows="4" ><?php echo htmlentities($result->street);?></textarea>
             </div>
             <div class="form-group">
               <label class="control-label">City</label>

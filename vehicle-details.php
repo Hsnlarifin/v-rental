@@ -204,7 +204,15 @@ foreach($results as $result)
         <div class="main_features">
           <ul>        
             <li> <i class="fa fa-calendar" aria-hidden="true"></i>
-              <h5><?php echo htmlentities($result->status);?></h5>
+            <?php if($result->status=='Available'){ ?> 
+
+              <h5 style="color:green"><?php echo htmlentities($result->status);?></h5>
+
+            <?php } else {?>
+
+            <h5 style="color:red"><?php echo htmlentities($result->status);?></h5>
+
+            <?php } ?>
               <p>Status</p>            
             </li>
             <li> <i class="fa fa-cogs" aria-hidden="true"></i>

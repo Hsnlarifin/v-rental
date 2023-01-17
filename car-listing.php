@@ -165,8 +165,8 @@ foreach($results as $result)
 {  ?>
 
               <li class="gray-bg">
-                <div class="recent_post_img"> <a href="vehical-details.php?vhid=<?php echo htmlentities($result->veh_ID);?>"><img src="assets/images/<?php echo htmlentities($result->veh_Image_1);?>" alt="image"></a> </div>
-                <div class="recent_post_title"> <a href="vehical-details.php?vhid=<?php echo htmlentities($result->veh_ID);?>"><?php echo htmlentities($result->brand_Name);?> , <?php echo htmlentities($result->veh_Model);?></a>
+                <div class="recent_post_img"> <a href="vehicle-details.php?vhid=<?php echo htmlentities($result->veh_ID);?>"><img src="assets/images/<?php echo htmlentities($result->veh_Image_1);?>" alt="image"></a> </div>
+                <div class="recent_post_title"> <a href="vehicle-details.php?vhid=<?php echo htmlentities($result->veh_ID);?>"><?php echo htmlentities($result->brand_Name);?> , <?php echo htmlentities($result->veh_Model);?></a>
                   <p class="widget_price">RM<?php echo htmlentities($result->price_per_Day);?> Per Day</p>
                 </div>
               </li>
