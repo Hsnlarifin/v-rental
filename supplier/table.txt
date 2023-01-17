@@ -84,5 +84,15 @@ INSERT INTO vehicle VALUES('28','LS',NULL,'Ron 97','SLIVER','5','AT','LEX 1','',
 INSERT INTO vehicle VALUES('27','Arteon',NULL,'Ron 97','BLUE','5','DCT','VKG 1','','9');
 
 
-
-
+INSERT INTO vehicle_record VALUE ('5','17','1001','8563 1203 5848','Third Party Fire & Theft',''Used Car','2023-01-11',NULL,'Full Loan','Pending');
+INSERT INTO vehicle_record VALUE ('10','21','1002','6520 7452 0115','Third Party Fire & Theft','New Car','2023-01-12',NULL,'Lean','Pending');
+INSERT INTO vehicle_record VALUE ('12','23','1002','11452 8856 1288','Third Party Fire & Theft','New Car','2023-01-12',NULL,'Lean','Pending');
+INSERT INTO vehicle_record VALUE ('13','24','1002','5123 7896 4512','Comprehensive','New Car','2023-01-12',NULL,'Lean','Pending');
+INSERT INTO vehicle_record VALUE ('14','25','1002','6421 8462 5135','Third Party','Used Car','2023-01-15',NULL,'Full Loan','Pending');
+INSERT INTO vehicle_record VALUE ('15','26','1002','1122  8562 7413','Third Party Fire & Theft','New Car','2023-01-15',NULL,'Full Loan','Pending');
+INSERT INTO vehicle_record VALUE ('16','27','1002','6214 4121 1000','Third Party','New Car','2023-01-15',NULL,'Lead','Pending');
+INSERT INTO vehicle_record VALUE ('17','28','1002','5412 6320 4470','Third Party Fire & Theft','New Car','2023-01-16',NULL,'Lead','Pending');
+INSERT INTO vehicle_record VALUE ('18','29','1001','7451 2103 5462','Comprehensive','New Car','2023-01-17',NULL,'Lead','Pending');
+INSERT INTO vehicle_record VALUE ('19','30','1001','6541 1323 7854','Third Party','New Car','2023-01-17',NULL,'Lead','Pending');
+INSERT INTO vehicle_record VALUE ('20','31','1001','5230 4710 3654','Third Party Fire & Theft','Used Car','2023-01-17',NULL,'Full Loan','Pending');
+INSERT INTO vehicle_record VALUE ('21','32','1001','3201 8956 1452','Third Party Fire & Theft','New Car','2023-01-17',NULL,'Lead','Pending');
