@@ -5,6 +5,28 @@ session_start();
 include('includes/config.php');
 error_reporting(0);
 
+session_start();
+
+try {
+  $username=$_SESSION['login'];
+    $stmt = $dbh ->prepare("SELECT * FROM customer WHERE cust_Username = :username");
+    $stmt->bindParam(':username', $username, PDO::PARAM_STR);
+    $stmt->execute();
+
+    if ($stmt->rowCount() > 0) {
+        // User with that email address exists in the database
+        // fetch the user's data and do something with it
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        $_SESSION['customer'] = $user['cust_ID'];
+    } else {
+        // User with that email address does not exist in the database
+        echo "Sorry, we couldn't find an account with that email address.";
+    }
+} catch(PDOException $e) {
+    echo "Error: " . $e->getMessage();
+}
+
+
 if(isset($_POST['submit']))
 {
 $fromdate=$_POST['fromdate'];
@@ -28,6 +50,9 @@ $results1=$query1->fetchAll(PDO::FETCH_OBJ);
 
 
 //make trigger for insert status auto pending
+//make trigger for paymentid
+//trigger to count days
+//trigger to change availibility 
 
 if($query1->rowCount()==0)
 {
@@ -46,6 +71,12 @@ if($lastInsertId)
 {
 echo "<script>alert('Booking successful.');</script>";
 echo "<script type='text/javascript'> document.location = 'my-booking.php'; </script>";
+
+//to call procedure to update totaldays attribute-------------
+$sql = "CALL updatetotaldays";
+$query = $dbh -> prepare($sql);
+$query->execute();
+
 }
 else 
 {
@@ -127,16 +158,51 @@ foreach($results as $result)
           <div class="col-md-3">
         <div class="price_info">
           <p>RM<?php echo htmlentities($result->price_per_Day);?> </p>Per Day
-        </div>       
+        </div>               
       </div>       
         </div>
-      </div>
+      </div>     
     </div>
+
+    <!--Side-Bar-->
+    <aside class="col-md-3">
+      
+      <div class="sidebar_widget">
+        <div class="widget_heading">
+          <h5><i class="fa fa-envelope" aria-hidden="true"></i>Book Now</h5>
+        </div>
+        <form method="post">
+          <div class="form-group">
+            <label>From Date:</label>
+            <input type="date" class="form-control" name="fromdate" placeholder="From Date" required>
+          </div>
+          <div class="form-group">
+            <label>To Date:</label>
+            <input type="date" class="form-control" name="todate" placeholder="To Date" required>
+          </div>
+          
+         <!-- <div class="form-group">
+            <textarea rows="4" class="form-control" name="message" placeholder="Message" ></textarea>
+          </div> -->
+          
+
+        <?php if($_SESSION['login'])
+            {?>
+            <div class="form-group">
+              <input type="submit" class="btn"  name="submit" value="Book Now">
+            </div>
+            <?php } else { ?>
+<a href="#loginform" class="btn btn-xs uppercase" data-toggle="modal" data-dismiss="modal">Login to Book</a>
+
+            <?php } ?>
+        </form>
+      </div>
+    </aside>
+    <!--/Side-Bar--> 
     <div class="row">
       <div class="col-md-9">
         <div class="main_features">
-          <ul>
-          
+          <ul>        
             <li> <i class="fa fa-calendar" aria-hidden="true"></i>
               <h5><?php echo htmlentities($result->status);?></h5>
               <p>Status</p>            
@@ -156,42 +222,7 @@ foreach($results as $result)
           <div class="listing_detail_wrap">                                                
 <?php }} 
 ?>
-      </div>
-      
-      <!--Side-Bar-->
-      <aside class="col-md-3">
-      
-        <div class="sidebar_widget">
-          <div class="widget_heading">
-            <h5><i class="fa fa-envelope" aria-hidden="true"></i>Book Now</h5>
-          </div>
-          <form method="post">
-            <div class="form-group">
-              <label>From Date:</label>
-              <input type="date" class="form-control" name="fromdate" placeholder="From Date" required>
-            </div>
-            <div class="form-group">
-              <label>To Date:</label>
-              <input type="date" class="form-control" name="todate" placeholder="To Date" required>
-            </div>
-            <!--
-            <div class="form-group">
-              <textarea rows="4" class="form-control" name="message" placeholder="Message" required></textarea>
-            </div>
-            -->
-          <?php if($_SESSION['login'])
-              {?>
-              <div class="form-group">
-                <input type="submit" class="btn"  name="submit" value="Book Now">
-              </div>
-              <?php } else { ?>
-<a href="#loginform" class="btn btn-xs uppercase" data-toggle="modal" data-dismiss="modal">Login to Book</a>
-
-              <?php } ?>
-          </form>
-        </div>
-      </aside>
-      <!--/Side-Bar--> 
+      </div>     
     </div>   
     <div class="space-20"></div>
     <div class="divider"></div>

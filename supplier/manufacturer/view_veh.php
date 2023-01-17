@@ -12,7 +12,7 @@
 			header('Location:../sindex.php');
 	}
 
-	$query_selectVehicle = "SELECT v.veh_ID,b.brand_Name,v.veh_Model,v.fuel_type,v.veh_Colour,v.seating_Capacity,v.veh_Transmission,v.veh_plateNo,v.veh_Image FROM vehicle v, vehicle_record r, supplier s, brand b WHERE s.sup_id = r.sup_id AND r.veh_ID = v.veh_ID AND b.brand_ID = v.brand_ID AND s.sup_id ='$sup_id' ";
+	$query_selectVehicle = "SELECT v.veh_ID,b.brand_Name,v.veh_Model,v.fuel_type,v.veh_Colour,v.seating_Capacity,v.veh_Transmission,v.veh_plateNo,v.veh_Image_1 FROM vehicle v, vehicle_record r, supplier s, brand b WHERE s.sup_id = r.sup_id AND r.veh_ID = v.veh_ID AND b.brand_ID = v.brand_ID AND s.sup_id ='$sup_id' ";
 	$result_selectVehicle = mysqli_query($conn,$query_selectVehicle);
 
 	//$query_selectBrand = "SELECT brand_Name,add_Date FROM brand";
@@ -79,7 +79,7 @@
 				<td> <?php echo $row_selectVehicle['seating_Capacity']; ?> </td>
 				<td> <?php echo $row_selectVehicle['veh_Transmission']; ?> </td>
 				<td> <?php echo $row_selectVehicle['veh_plateNo']; ?> </td>
-				<td> upload/<?php echo '<img src="data:image/jpeg;base64,'.base64_encode($row_selectVehicle['veh_Image']).'""/>' ;?> </td>
+				<td> upload/<?php echo '<img src="data:image/jpeg;base64,'.base64_encode($row_selectVehicle['veh_Image_1']).'""/>' ;?> </td>
 				
 				<td> <a href="edit_veh.php?veh_ID=<?php echo $row_selectVehicle['veh_ID']; ?>"><img src="../images/edit.png" alt="edit" /></a> </td>
 

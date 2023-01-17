@@ -81,6 +81,7 @@ error_reporting(0);
         <!--BUTTON SUBMIT TO LOGIN-->
           <div>
             <button type="submit" class="btn btn-success" name="submit">Log In</button>
+            <p style="margin-top: 4%" align="center"><a href="../../index.php">Back to Home</a>	</p>
           </div>
 
         </div>

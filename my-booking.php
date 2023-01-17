@@ -7,6 +7,7 @@ if(strlen($_SESSION['login'])==0)
 header('location:index.php');
 }
 else{
+
 ?><!DOCTYPE HTML>
 <html lang="en">
 <head>
@@ -58,6 +59,7 @@ else{
       <ul class="coustom-breadcrumb">
         <li><a href="#">Home</a></li>
         <li>My Reservation</li>
+        
       </ul>
     </div>
   </div>
@@ -66,20 +68,41 @@ else{
 </section>
 <!-- /Page Header--> 
 
+
+
+
+
 <?php 
+
+session_start();
+try {
+  $username=$_SESSION['login'];
+    $stmt = $dbh ->prepare("SELECT * FROM customer WHERE cust_Username = :username");
+    $stmt->bindParam(':username', $username, PDO::PARAM_STR);
+    $stmt->execute();
+
+    if ($stmt->rowCount() > 0) {
+        // User with that email address exists in the database
+        // fetch the user's data and do something with it
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        $_SESSION['customer'] = $user['cust_ID'];
+    } else {       
+    }
+} catch(PDOException $e) {
+    echo "Error: " . $e->getMessage();
+}
 $username=$_SESSION['login'];
 /*$sql = "SELECT * FROM user WHERE user_ID = 
    (SELECT user_ID
     FROM customer
     WHERE cust_Username = :username)";
     */
-
 $sql = "CALL getuserinfo(:username)";
 $query = $dbh -> prepare($sql);
 //$stmt = $dbh->prepare("CALL getUserinfo(:username)");
 $query -> bindParam(':username', $username, PDO::PARAM_STR);
-
 $query->execute();
+
 $results=$query->fetchAll(PDO::FETCH_OBJ);
 $cnt=1;
 if($query->rowCount() > 0)
@@ -89,7 +112,7 @@ foreach($results as $result)
 <section class="user_profile inner_pages">
   <div class="container">
     <div class="user_profile_info gray-bg padding_4x4_40">
-      <div class="upload_user_logo"> <img src="assets/images/dealer-logo.jpg" alt="image">
+      <div class="upload_user_logo"> <img src="assets/images/utem.png" alt="image">
       </div>
 
       <div class="dealer_info">
@@ -104,14 +127,17 @@ foreach($results as $result)
    
       <div class="col-md-8 col-sm-8">
         <div class="profile_wrap">
-          <h5 class="uppercase underline">RESERVATION</h5>
+          <h5 class="uppercase underline">RESERVATION </h5>
           <div class="my_vehicles_list">
             <ul class="vehicle_listing">
+
+            
 <?php 
-$useremail=$_SESSION['login'];
- $sql = "SELECT tblvehicles.Vimage1 as Vimage1,tblvehicles.VehiclesTitle,tblvehicles.id as vid,tblbrands.BrandName,tblbooking.FromDate,tblbooking.ToDate,tblbooking.message,tblbooking.Status,tblvehicles.PricePerDay,DATEDIFF(tblbooking.ToDate,tblbooking.FromDate) as totaldays,tblbooking.BookingNumber  from tblbooking join tblvehicles on tblbooking.VehicleId=tblvehicles.id join tblbrands on tblbrands.id=tblvehicles.VehiclesBrand where tblbooking.userEmail=:useremail order by tblbooking.id desc";
+
+ $custid=$_SESSION['customer'];
+ $sql = "SELECT vehicle.veh_Image_1 as veh_Image_1 ,vehicle.veh_Model,vehicle.veh_ID as VID,brand.brand_Name,reservation.resv_ID,reservation.from_Date,reservation.to_Date,reservation.Status,vehicle.price_per_Day,reservation.total_days,reservation.Booking_Key from reservation join vehicle on reservation.veh_ID=vehicle.veh_ID join brand on brand.brand_ID=vehicle.brand_ID where reservation.cust_ID=:custid order by reservation.resv_ID desc";
 $query = $dbh -> prepare($sql);
-$query-> bindParam(':useremail', $useremail, PDO::PARAM_STR);
+$query-> bindParam(':custid', $custid, PDO::PARAM_STR);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
 $cnt=1;
@@ -121,29 +147,33 @@ foreach($results as $result)
 {  ?>
 
 <li>
-    <h4 style="color:red">Booking No #<?php echo htmlentities($result->BookingNumber);?></h4>
-                <div class="vehicle_img"> <a href="vehical-details.php?vhid=<?php echo htmlentities($result->vid);?>"><img src="admin/img/vehicleimages/<?php echo htmlentities($result->Vimage1);?>" alt="image"></a> </div>
+
+    <h4 style="color:red">Booking No #<?php echo htmlentities($result->Booking_Key);?></h4>
+                <div class="vehicle_img"> <a href="vehicle-details.php?vhid=<?php echo htmlentities($result->VID);?>"><img src="assets/images/<?php echo htmlentities($result->veh_Image_1);?>" alt="image"></a> </div>
                 <div class="vehicle_title">
 
-                  <h6><a href="vehical-details.php?vhid=<?php echo htmlentities($result->vid);?>"> <?php echo htmlentities($result->BrandName);?> , <?php echo htmlentities($result->VehiclesTitle);?></a></h6>
-                  <p><b>From </b> <?php echo htmlentities($result->FromDate);?> <b>To </b> <?php echo htmlentities($result->ToDate);?></p>
+                  <h6><a href="vehicle-details.php?vhid=<?php echo htmlentities($result->VID);?>"> <?php echo htmlentities($result->brand_Name);?> , <?php echo htmlentities($result->veh_Model);?></a></h6>
+                  <p><b>From </b> <?php echo htmlentities($result->from_Date);?> <b>To </b> <?php echo htmlentities($result->to_Date);?></p>
                   <div style="float: left"><p><b>Message:</b> <?php echo htmlentities($result->message);?> </p></div>
                 </div>
-                <?php if($result->Status==1)
+                <?php if($result->Status=='PENDING')
                 { ?>
-                <div class="vehicle_status"> <a href="#" class="btn outline btn-xs active-btn">Confirmed</a>
+                <div class="vehicle_status"> <a href="payment.php?resvid=<?php echo htmlentities($result->resv_ID);?>" class="btn outline btn-xs ">CONFIRM PAYMENT</a>  
+              
+                <?php echo htmlentities($result->Status);?>
                            <div class="clearfix"></div>
         </div>
 
-              <?php } else if($result->Status==2) { ?>
- <div class="vehicle_status"> <a href="#" class="btn outline btn-xs">Cancelled</a>
+              <?php } else if($result->Status=='CONFIRMED') { ?>
+ <div class="vehicle_status"> <a class="btn outline active-btn btn-xs">PAYMENT SUCCESSFUL</a>
+            <?php echo htmlentities($result->Status);?>
             <div class="clearfix"></div>
         </div>
              
 
 
                 <?php } else { ?>
- <div class="vehicle_status"> <a href="#" class="btn outline btn-xs">Not Confirm yet</a>
+ <div class="vehicle_status"> <a href="#" class="btn outline btn-xs">-</a>
             <div class="clearfix"></div>
         </div>
                 <?php } ?>
@@ -160,15 +190,15 @@ foreach($results as $result)
     <th>Rent / Day</th>
   </tr>
   <tr>
-    <td><?php echo htmlentities($result->VehiclesTitle);?>, <?php echo htmlentities($result->BrandName);?></td>
-     <td><?php echo htmlentities($result->FromDate);?></td>
-      <td> <?php echo htmlentities($result->ToDate);?></td>
-       <td><?php echo htmlentities($tds=$result->totaldays);?></td>
-        <td> <?php echo htmlentities($ppd=$result->PricePerDay);?></td>
+    <td><?php echo htmlentities($result->veh_Model);?>, <?php echo htmlentities($result->brand_Name);?></td>
+     <td><?php echo htmlentities($result->from_Date);?></td>
+      <td> <?php echo htmlentities($result->to_Date);?></td>
+       <td><?php echo htmlentities($tds=$result->total_days);?></td>
+        <td> RM <?php echo htmlentities($ppd=$result->price_per_Day);?></td>
   </tr>
   <tr>
     <th colspan="4" style="text-align:center;"> Grand Total</th>
-    <th><?php echo htmlentities($tds*$ppd);?></th>
+    <th>RM <?php echo htmlentities($tds*$ppd);?></th>
   </tr>
 </table>
 <hr />
@@ -191,10 +221,6 @@ foreach($results as $result)
 <script src="assets/js/jquery.min.js"></script>
 <script src="assets/js/bootstrap.min.js"></script> 
 <script src="assets/js/interface.js"></script> 
-<!--Switcher-->
-<script src="assets/switcher/js/switcher.js"></script>
-<!--bootstrap-slider-JS--> 
-<script src="assets/js/bootstrap-slider.min.js"></script> 
 <!--Slider-JS--> 
 <script src="assets/js/slick.min.js"></script> 
 <script src="assets/js/owl.carousel.min.js"></script>
