@@ -11,21 +11,42 @@ if(isset($_POST['updateprofile']))
   {
 $fname=$_POST['fname'];
 $lname=$_POST['lname'];
-$mobileno=$_POST['mobilenumber'];
-$dob=$_POST['dob'];
-$adress=$_POST['address'];
+$gender=$_POST['gender'];
+$age=$_POST['age'];
+$email=$_POST['email'];
+$phone=$_POST['phone'];
+$street=$_POST['street'];
+$postcode=$_POST['postcode'];
 $city=$_POST['city'];
-$country=$_POST['country'];
-$email=$_SESSION['login'];
-$sql="update users set FullName=:name,ContactNo=:mobileno,dob=:dob,Address=:adress,City=:city,Country=:country where EmailId=:email";
+$state=$_POST['state'];
+$username=$_SESSION['login'];
+$sql="UPDATE user
+INNER JOIN customer 
+ON user.user_ID = customer.user_ID SET 
+user.f_name = ':fname', 
+user.l_name = ':lname',
+user.gender = ':gender', 
+user.age = ':age',
+user.email = ':email',
+user.phoneNo = ':phone', 
+customer.street = ':street',
+customer.postcode = ':postcode',
+customer.city = ':city',
+customer.state = ':state'
+WHERE user.user_ID = (select user_ID from customer where cust_Username = ':username')";
+
 $query = $dbh->prepare($sql);
-$query->bindParam(':name',$name,PDO::PARAM_STR);
-$query->bindParam(':mobileno',$mobileno,PDO::PARAM_STR);
-$query->bindParam(':dob',$dob,PDO::PARAM_STR);
-$query->bindParam(':adress',$adress,PDO::PARAM_STR);
-$query->bindParam(':city',$city,PDO::PARAM_STR);
-$query->bindParam(':country',$country,PDO::PARAM_STR);
+$query->bindParam(':f_name',$fname,PDO::PARAM_STR);
+$query->bindParam(':l_name',$lname,PDO::PARAM_STR);
+$query->bindParam(':gender',$gender,PDO::PARAM_STR);
+$query->bindParam(':age',$age,PDO::PARAM_STR);
 $query->bindParam(':email',$email,PDO::PARAM_STR);
+$query->bindParam(':phone',$phone,PDO::PARAM_STR);
+$query->bindParam(':street',$street,PDO::PARAM_STR);
+$query->bindParam(':postcode',$postcode,PDO::PARAM_STR);
+$query->bindParam(':city',$city,PDO::PARAM_STR);
+$query->bindParam(':state',$state,PDO::PARAM_STR);
+$query->bindParam(':username',$username,PDO::PARAM_STR);
 $query->execute();
 $msg="Profile Updated Successfully";
 }
@@ -52,15 +73,8 @@ $msg="Profile Updated Successfully";
 
 <!-- SWITCHER -->
 		<link rel="stylesheet" id="switcher-css" type="text/css" href="assets/switcher/css/switcher.css" media="all" />
-		<link rel="alternate stylesheet" type="text/css" href="assets/switcher/css/red.css" title="red" media="all" data-default-color="true" />
-		<link rel="alternate stylesheet" type="text/css" href="assets/switcher/css/orange.css" title="orange" media="all" />
-		<link rel="alternate stylesheet" type="text/css" href="assets/switcher/css/blue.css" title="blue" media="all" />
-		<link rel="alternate stylesheet" type="text/css" href="assets/switcher/css/pink.css" title="pink" media="all" />
-		<link rel="alternate stylesheet" type="text/css" href="assets/switcher/css/green.css" title="green" media="all" />
-		<link rel="alternate stylesheet" type="text/css" href="assets/switcher/css/purple.css" title="purple" media="all" />
-<link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/images/favicon-icon/apple-touch-icon-144-precomposed.png">
-<link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/images/favicon-icon/apple-touch-icon-114-precomposed.html">
-<link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/images/favicon-icon/apple-touch-icon-72-precomposed.png">
+
+
 <link rel="apple-touch-icon-precomposed" href="assets/images/favicon-icon/apple-touch-icon-57-precomposed.png">
 <link rel="shortcut icon" href="assets/images/favicon-icon/favicon.png">
 <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet"> 
@@ -159,11 +173,19 @@ foreach($results as $result)
             <?php } ?>
             <div class="form-group">
               <label class="control-label">First Name</label>
-              <input class="form-control white_bg" name="fullname" value="<?php echo htmlentities($result->f_name);?>" id="fullname" type="text"  required>
+              <input class="form-control white_bg" name="fullname" value="<?php echo htmlentities($result->f_name);?>" id="fname" type="text"  required>
             </div>
             <div class="form-group">
               <label class="control-label">Last Name</label>
-              <input class="form-control white_bg" name="fullname" value="<?php echo htmlentities($result->l_name);?>" id="fullname" type="text"  required>
+              <input class="form-control white_bg" name="fullname" value="<?php echo htmlentities($result->l_name);?>" id="lname" type="text"  required>
+            </div>
+            <div class="form-group">
+              <label class="control-label">Gender</label>
+              <input class="form-control white_bg" value="<?php echo htmlentities($result->gender);?>" name="gender" id="gender" type="text" required readonly>
+            </div>
+            <div class="form-group">
+              <label class="control-label">Age</label>
+              <input class="form-control white_bg" value="<?php echo htmlentities($result->age);?>" name="age" id="age" type="text" required readonly>
             </div>
             <div class="form-group">
               <label class="control-label">Email Address</label>
@@ -171,23 +193,23 @@ foreach($results as $result)
             </div>
             <div class="form-group">
               <label class="control-label">Phone Number</label>
-              <input class="form-control white_bg" name="mobilenumber" value="<?php echo htmlentities($result->phoneNo);?>" id="phone-number" type="text" required>
-            </div>
-            <div class="form-group">
-              <label class="control-label">Age</label>
-              <input class="form-control white_bg" value="<?php echo htmlentities($result->age);?>" name="dob" placeholder="dd/mm/yyyy" id="birth-date" type="text" >
-            </div>
+              <input class="form-control white_bg" name="phone" value="<?php echo htmlentities($result->phoneNo);?>" id="phone" type="text" required>
+            </div>       
             <div class="form-group">
               <label class="control-label">Street Address</label>
               <textarea class="form-control white_bg" name="address" rows="4" ><?php echo htmlentities($result->street);?></textarea>
             </div>
             <div class="form-group">
+              <label class="control-label">Postcode</label>
+              <input class="form-control white_bg"  id="postcode" name="postcode" value="<?php echo htmlentities($result->postcode);?>" type="text">
+            </div>
+            <div class="form-group">
               <label class="control-label">City</label>
-              <input class="form-control white_bg"  id="country" name="city" value="<?php echo htmlentities($result->city);?>" type="text">
+              <input class="form-control white_bg"  id="city" name="city" value="<?php echo htmlentities($result->city);?>" type="text">
             </div>
             <div class="form-group">
               <label class="control-label">State</label>
-              <input class="form-control white_bg" id="city" name="state" value="<?php echo htmlentities($result->state);?>" type="text">
+              <input class="form-control white_bg" id="state" name="state" value="<?php echo htmlentities($result->state);?>" type="text">
             </div>
             <?php }} ?>
            

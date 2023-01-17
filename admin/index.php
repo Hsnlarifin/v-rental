@@ -3,11 +3,12 @@ session_start();
 include('includes/config.php');
 if(isset($_POST['login']))
 {
-$email=$_POST['username'];
-$password=md5($_POST['password']);
-$sql ="SELECT UserName,Password FROM admin WHERE UserName=:email and Password=:password";
+$staffuser=$_POST['username'];
+//$password=md5($_POST['password']);
+$password=$_POST['password'];
+$sql ="SELECT staff_Username,staff_Pass FROM staff WHERE staff_Username=:username and staff_Pass=:password";
 $query= $dbh -> prepare($sql);
-$query-> bindParam(':email', $email, PDO::PARAM_STR);
+$query-> bindParam(':username', $staffuser, PDO::PARAM_STR);
 $query-> bindParam(':password', $password, PDO::PARAM_STR);
 $query-> execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);

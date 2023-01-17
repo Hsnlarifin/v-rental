@@ -66,7 +66,7 @@ echo "<script type='text/javascript'> document.location = '$currentpage'; </scri
       <div class="modal-footer text-center">
         <p>New User? <a href="#signupform" data-toggle="modal" data-dismiss="modal"> Signup Here</a></p>
         <p><a href="#forgotpassword" data-toggle="modal" data-dismiss="modal">Forgot Password ?</a></p>
-        <p><a href="user/admin/admin_login.php">Administrator</a>  |  <a href="supplier/sindex.php">Supplier</a></p> 
+        <p><a href="admin/index.php">Administrator</a>  |  <a href="supplier/sindex.php">Supplier</a></p> 
       </div>
     </div>
   </div>

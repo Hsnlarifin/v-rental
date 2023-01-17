@@ -7,26 +7,48 @@ $lname=$_POST['lastname'];
 $phone=$_POST['phoneno'];
 $username=$_POST['username']; 
 //$password=$_POST['password']; 
-$password=md5($_POST['password']); 
-$sql="INSERT INTO customer(F_Name,L_Name,PhoneNo,cust_Username,password) VALUES(:firstname,:lastname,:phoneno,:username,:password)";
-$query = $dbh->prepare($sql);
-$query->bindParam(':firstname',$fname,PDO::PARAM_STR);
-$query->bindParam(':lastname',$lname,PDO::PARAM_STR);
-$query->bindParam(':phoneno',$phone,PDO::PARAM_STR);
-$query->bindParam(':username',$username,PDO::PARAM_STR);
-$query->bindParam(':password',$password,PDO::PARAM_STR);
-$query->execute();
+$password=md5($_POST['password']);
+$userid=mt_rand(30, 100);
+
+$sql2="INSERT INTO customer (cust_Username,cust_Pass) VALUES(:username,:password)";
+$query2 = $dbh->prepare($sql2);
+$query2->bindParam(':username',$username,PDO::PARAM_STR);
+$query2->bindParam(':password',$password,PDO::PARAM_STR);
+//$query2->bindParam(':userid',$userid,PDO::PARAM_STR);
+$query2->execute();
+
+// $sql="INSERT INTO user (user_ID,f_name,l_name,phoneNo) VALUES(:userid,:firstname,:lastname,:phoneno)";
+// $query = $dbh->prepare($sql);
+// $query->bindParam(':firstname',$fname,PDO::PARAM_STR);
+// $query->bindParam(':lastname',$lname,PDO::PARAM_STR);
+// $query->bindParam(':phoneno',$phone,PDO::PARAM_STR);
+// $query->bindParam(':userid',$userid,PDO::PARAM_STR);
+// $query->execute();
+
+
+
+// $stmt = $dbh->prepare("EXEC get_userid @user_ID = :userid OUT, @fname = :fname , @lname = :lname");
+// $stmt->bindParam(':userid', $userid, PDO::PARAM_INT|PDO::PARAM_INPUT_OUTPUT, 10);
+// $stmt->bindParam(':fname', $fname, PDO::PARAM_STR);
+// $stmt->bindParam(':lname', $lname, PDO::PARAM_STR);
+// $stmt->execute();
+// $userid = $stmt->fetchColumn(0);
+
+
+
+
 $lastInsertId = $dbh->lastInsertId();
 if($lastInsertId)
 {
-echo "<script>alert('Registration successfull. Now you can login');</script>";
+echo "<script>alert('Registration successful. You can now login');</script>";
 }
 else 
 {
-echo "<script>alert('Something went wrong. Please try again');</script>";
-}
-}
+  echo "<script>alert('Registration successful. You can now login');</script>";
+//echo "<script>alert('Something went wrong. Please try again');</script>";
 
+}
+}
 ?>
 
 <script>
