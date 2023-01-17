@@ -59,9 +59,12 @@ include ('config.php');
 	<li>
 		<div class="input-group">
 		<button name="btn_login" class="btn">Log in</button>
+		<p style="margin-top: 4%" align="center"><a href="../index.php">Back to Home</a>	</p>	
 		</div>
 		<!--<input type="submit" value="Login" class="submit_button" /> <span class="error_message"> <?php echo $loginErr; echo $reqErr; ?> </span>-->
+		
 	</li>
+
 	</ul>
 	</form>
 </body>

@@ -10,15 +10,15 @@ $sql ="SELECT cust_Username,cust_Pass,user_ID,cust_ID FROM customer WHERE cust_U
 $query= $dbh -> prepare($sql);
 $query-> bindParam(':username', $username, PDO::PARAM_STR);
 $query-> bindParam(':password', $password, PDO::PARAM_STR);
-
 $query-> execute();
-$results=$query->fetchAll(PDO::FETCH_OBJ);
-$_SESSION['customer'] = $results[0]->cust_ID;
+//$results=$query->fetchAll(PDO::FETCH_OBJ);
+//$_SESSION['customer'] = $results[0]->cust_ID;
 
 if($query->rowCount() > 0)
 {
+$results=$query->fetchAll(PDO::FETCH_OBJ); 
 $_SESSION['login']=$_POST['username'];
-
+//$_SESSION['customer']= $results['cust_ID'];
 //$_SESSION['customer']= htmlentities($result->cust_ID);
 //$_SESSION['userid']=$results->user_ID;
 $currentpage=$_SERVER['REQUEST_URI'];
@@ -66,7 +66,7 @@ echo "<script type='text/javascript'> document.location = '$currentpage'; </scri
       <div class="modal-footer text-center">
         <p>New User? <a href="#signupform" data-toggle="modal" data-dismiss="modal"> Signup Here</a></p>
         <p><a href="#forgotpassword" data-toggle="modal" data-dismiss="modal">Forgot Password ?</a></p>
-        <p><a href="admin/index.php">Administrator</a></p>
+        <p><a href="user/admin/admin_login.php">Administrator</a>  |  <a href="supplier/sindex.php">Supplier</a></p> 
       </div>
     </div>
   </div>

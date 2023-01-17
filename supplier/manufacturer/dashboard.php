@@ -9,7 +9,7 @@ session_start();
 		}
 		else
 		{
-			header('Location:../sindex.php');
+			header('Location:../../index.php');
 		}
 
 
@@ -19,7 +19,7 @@ $row_selectSupplier = mysqli_fetch_array($result_selectSupplier);
 
 $query_selectVehicle = "SELECT v.veh_ID,b.brand_Name,v.veh_Model,v.fuel_type,v.veh_Colour,v.seating_Capacity,v.veh_Transmission,v.veh_plateNo,r.progress FROM vehicle v, vehicle_record r, supplier s, brand b WHERE s.sup_id = r.sup_id AND r.veh_ID = v.veh_ID AND b.brand_ID = v.brand_ID AND s.sup_id ='$sup_id' ";
 $result_selectVehicle = mysqli_query($conn,$query_selectVehicle);
-//$row_selectVehicle = mysqli_fetch_array($result_selectVehicle);
+//$row_selectVehicle = mysqli_fetch_array1($result_selectVehicle);
 
 ?>
 <!DOCTYPE html>
@@ -75,7 +75,7 @@ $result_selectVehicle = mysqli_query($conn,$query_selectVehicle);
 				<th>Plate No</th>
 				<th>Progress</th>
 			</tr>
-			<?php $i=1; while($row_selectVehicle = mysqli_fetch_array($result_selectVehicle)) { ?>
+			<?php $i=1; while($row_selectVehicle = mysqli_fetch_array1($result_selectVehicle)) { ?>
 			<tr>
 			
 				<td> <?php echo $row_selectVehicle['veh_ID']; ?> </td>
