@@ -29,14 +29,14 @@ error_reporting(0);
 
 <!--Header-->
 <?php include('includes/header.php');?>
-<!-- Header --> 
 
 
 <!-- Resent Cat-->
 <section class="section-padding gray-bg">
   <div class="container">
     <div class="section-header text-center">
-      <h2>Find the Best <span>CarForYou</span></h2>     
+      <h2>Find the Best <span>With V-Rental</span></h2>   
+      <h3 class="text-center"><a href="car-listing.php">Book a car Now</a> <h3>  
     </div>
     <div class="row"> 
         

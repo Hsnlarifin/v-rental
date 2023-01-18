@@ -10,7 +10,7 @@ else{
 if(isset($_GET['del']))
 {
 $id=$_GET['del'];
-$sql = "delete from tblbrands  WHERE id=:id";
+$sql = "delete from brand  WHERE brand_ID=:id";
 $query = $dbh->prepare($sql);
 $query -> bindParam(':id',$id, PDO::PARAM_STR);
 $query -> execute();
@@ -115,7 +115,7 @@ $msg="Page data updated  successfully";
 									</tfoot>
 									<tbody>
 
-									<?php $sql = "SELECT * from  tblbrands ";
+									<?php $sql = "SELECT * from  brand ";
 $query = $dbh -> prepare($sql);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
@@ -126,9 +126,9 @@ foreach($results as $result)
 {				?>	
 										<tr>
 											<td><?php echo htmlentities($cnt);?></td>
-											<td><?php echo htmlentities($result->BrandName);?></td>
-											<td><?php echo htmlentities($result->CreationDate);?></td>
-											<td><?php echo htmlentities($result->UpdationDate);?></td>
+											<td><?php echo htmlentities($result->brand_Name);?></td>
+											<td><?php echo htmlentities($result->add_Date);?></td>
+											<td><?php echo htmlentities($result->update_Date);?></td>
 <td><a href="edit-brand.php?id=<?php echo $result->id;?>"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;
 <a href="manage-brands.php?del=<?php echo $result->id;?>" onclick="return confirm('Do you want to delete');"><i class="fa fa-close"></i></a></td>
 										</tr>

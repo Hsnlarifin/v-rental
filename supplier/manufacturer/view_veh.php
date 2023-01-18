@@ -12,7 +12,7 @@
 			header('Location:../sindex.php');
 	}
 
-	$query_selectVehicle = "SELECT v.veh_ID,b.brand_Name,v.veh_Model,v.fuel_type,v.veh_Colour,v.seating_Capacity,v.veh_Transmission,v.veh_plateNo,v.veh_Image_1 FROM vehicle v, vehicle_record r, supplier s, brand b WHERE s.sup_id = r.sup_id AND r.veh_ID = v.veh_ID AND b.brand_ID = v.brand_ID AND s.sup_id ='$sup_id' ";
+	$query_selectVehicle = "SELECT v.veh_ID,b.brand_Name,v.veh_Model,v.fuel_Type,v.veh_Colour,v.seating_Capacity,v.veh_Transmission,v.veh_plateNo,v.veh_Image_1 FROM vehicle v, vehicle_record r, supplier s, brand b WHERE s.sup_id = r.sup_id AND r.veh_ID = v.veh_ID AND b.brand_ID = v.brand_ID AND s.sup_id ='$sup_id' ";
 	$result_selectVehicle = mysqli_query($conn,$query_selectVehicle);
 
 	//$query_selectBrand = "SELECT brand_Name,add_Date FROM brand";
@@ -74,7 +74,7 @@
 				<td> <?php echo $row_selectVehicle['veh_ID']; ?> </td>
 				<td> <?php echo $row_selectVehicle['brand_Name']; ?> </td>
 				<td> <?php echo $row_selectVehicle['veh_Model']; ?> </td>
-				<td> <?php echo $row_selectVehicle['fuel_type']; ?> </td>
+				<td> <?php echo $row_selectVehicle['fuel_Type']; ?> </td>
 				<td> <?php echo $row_selectVehicle['veh_Colour']; ?> </td>
 				<td> <?php echo $row_selectVehicle['seating_Capacity']; ?> </td>
 				<td> <?php echo $row_selectVehicle['veh_Transmission']; ?> </td>

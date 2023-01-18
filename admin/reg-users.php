@@ -10,7 +10,7 @@ else{
 if(isset($_GET['del']))
 {
 $id=$_GET['del'];
-$sql = "delete from tblbrands  WHERE id=:id";
+$sql = "delete from brand  WHERE brand_ID=:id";
 $query = $dbh->prepare($sql);
 $query -> bindParam(':id',$id, PDO::PARAM_STR);
 $query -> execute();
@@ -122,7 +122,7 @@ $msg="Page data updated  successfully";
 									</tfoot>
 									<tbody>
 
-									<?php $sql = "SELECT * from  tblusers ";
+									<?php $sql = "SELECT * from  user join customer on user.user_ID = customer.user_ID ";
 $query = $dbh -> prepare($sql);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
@@ -133,13 +133,13 @@ foreach($results as $result)
 {				?>	
 										<tr>
 											<td><?php echo htmlentities($cnt);?></td>
-											<td><?php echo htmlentities($result->FullName);?></td>
-											<td><?php echo htmlentities($result->EmailId);?></td>
-											<td><?php echo htmlentities($result->ContactNo);?></td>
-	<td><?php echo htmlentities($result->dob);?></td>
-											<td><?php echo htmlentities($result->Address);?></td>
-											<td><?php echo htmlentities($result->City);?></td>
-											<td><?php echo htmlentities($result->Country);?></td>
+											<td><?php echo htmlentities($result->f_name);?></td>
+											<td><?php echo htmlentities($result->email);?></td>
+											<td><?php echo htmlentities($result->phoneNo);?></td>
+											<td><?php echo htmlentities($result->age);?></td>
+											<td><?php echo htmlentities($result->street);?></td>
+											<td><?php echo htmlentities($result->city);?></td>
+											<td><?php echo htmlentities($result->state);?></td>
 											<td><?php echo htmlentities($result->RegDate);?></td>
 										</tr>
 										<?php $cnt=$cnt+1; }} ?>

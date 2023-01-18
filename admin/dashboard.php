@@ -143,7 +143,7 @@ $brands=$query3->rowCount();
 						<div class="row">
 							<div class="col-md-12">
 								<div class="row">
-									<div class="col-md-3">
+									<!-- <div class="col-md-3">
 										<div class="panel panel-default">
 											<div class="panel-body bk-primary text-light">
 												<div class="stat-panel text-center">
@@ -160,8 +160,8 @@ $subscribers=$query4->rowCount();
 											</div>
 											<a href="manage-subscribers.php" class="block-anchor panel-footer text-center">More <i class="fa fa-arrow-right"></i></a>
 										</div>
-									</div>
-									<div class="col-md-3">
+									</div> -->
+									<!-- <div class="col-md-3">
 										<div class="panel panel-default">
 											<div class="panel-body bk-success text-light">
 												<div class="stat-panel text-center">
@@ -178,8 +178,8 @@ $query=$query6->rowCount();
 											</div>
 											<a href="manage-conactusquery.php" class="block-anchor panel-footer text-center">More &nbsp; <i class="fa fa-arrow-right"></i></a>
 										</div>
-									</div>
-									<div class="col-md-3">
+									</div> -->
+									<!-- <div class="col-md-3">
 										<div class="panel panel-default">
 											<div class="panel-body bk-info text-light">
 												<div class="stat-panel text-center">
@@ -215,8 +215,8 @@ $brands=$query3->rowCount();
 											</div>
 											<a href="manage-brands.php" class="block-anchor panel-footer text-center">More &nbsp; <i class="fa fa-arrow-right"></i></a>
 										</div>
-									</div>																
-								</div>
+									</div>																 
+								 </div>
 								<div class="row">
 									<div class="col-md-3">
 										<div class="panel panel-default">
@@ -235,7 +235,7 @@ $subscribers=$query4->rowCount();
 											</div>
 											<a href="manage-subscribers.php" class="block-anchor panel-footer text-center">More <i class="fa fa-arrow-right"></i></a>
 										</div>
-									</div>
+									</div> -->
 							</div>
 						</div>
 					</div>

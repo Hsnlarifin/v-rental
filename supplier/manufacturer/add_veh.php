@@ -20,7 +20,7 @@ if(isset($_POST['submit']))
 	$brand_Name = $_POST['brand_Name'];
 	
 	$veh_Model = $_POST['veh_Model'];
-	$fuel_type = $_POST['fuel_type'];
+	$fuel_type = $_POST['fuel_Type'];
 	$veh_Colour = $_POST['veh_Colour'];
 	$seating_Capacity = $_POST['seating_Capacity'];
 	$veh_Transmission = $_POST['veh_Transmission'];
@@ -44,21 +44,35 @@ if(isset($_POST['submit']))
 		}
 
 
-		$qry = "INSERT INTO Vehicle (veh_Model,fuel_type,veh_Colour,seating_Capacity,veh_Transmission,veh_plateNo,brand_ID) VALUES ('$veh_Model','$fuel_type','$veh_Colour','$seating_Capacity','$veh_Transmission','$veh_plateNo','$brand_ID') ";
+		$qry = "INSERT INTO Vehicle (veh_Model,fuel_Type,veh_Colour,seating_Capacity,veh_Transmission,veh_plateNo,brand_ID) VALUES ('$veh_Model','$fuel_Type','$veh_Colour','$seating_Capacity','$veh_Transmission','$veh_plateNo','$brand_ID') ";
 		
 		if(mysqli_query($conn,$qry)) {
+			//$vehID = $conn->insert_id();
+			$vehID = mysqli_insert_id($conn); 
 			echo "<script> alert(\"Vehicle Details Added Successfully\"); </script>";
+			echo "$vehID";
 
 			$veh_Image_1 = $_FILES['image']['name'];
 			$veh_Image_1_temp = $_FILES['image']['tmp_name'];
 			$targetPath = "images/".$veh_Image_1;
 
-			$sql="INSERT INTO Vehicle (veh_Image_1) VALUES ('$image');";
+			if (!empty($veh_Image_1)){
+
+				$sql="UPDATE Vehicle SET veh_Image_1 = '$veh_Image_1' WHERE veh_ID = $vehID;";
 			$result = mysqli_query($conn,$sql);
+			}
+
+			
+			else {
+				echo "<script> alert('No image uploaded!'); </script>";
+				echo"<meta http-equiv='refresh' content='0; url=view_veh.php'/>";
+
+			}
+
 		}
 
 			
-				
+	}		
 		
 	
 	else{
@@ -76,21 +90,39 @@ if(isset($_POST['submit']))
 			$brand_ID = $row['brand_ID'];
 		}
 
-		$qry = "INSERT INTO Vehicle (veh_Model,fuel_type,veh_Colour,seating_Capacity,veh_Transmission,veh_plateNo,brand_ID) VALUES ('$veh_Model','$fuel_type','$veh_Colour','$seating_Capacity','$veh_Transmission','$veh_plateNo','$brand_ID') ";
+		$qry = "INSERT INTO Vehicle (veh_Model,fuel_Type,veh_Colour,seating_Capacity,veh_Transmission,veh_plateNo,brand_ID) VALUES ('$veh_Model','$fuel_Type','$veh_Colour','$seating_Capacity','$veh_Transmission','$veh_plateNo','$brand_ID') ";
 		
 		if(mysqli_query($conn,$qry)) {
-			echo "<script> alert(\"Vehicle Added Successfully\"); </script>";
 
-							
-		}
+			//$vehID = $conn->insert_id();
+			$vehID = mysqli_insert_id($conn); 
+
+			echo "<script> alert(\"Vehicle Added Successfully\"); </script>";
+			echo "$vehID";
+
+			
 
 			$veh_Image_1 = $_FILES['image']['name'];
 			$veh_Image_1_temp = $_FILES['image']['tmp_name'];
 			$targetPath = "images/".$veh_Image_1;
 
-			$sql="INSERT INTO Vehicle (veh_Image_1) VALUES ('$image');";
+			if (!empty($veh_Image_1)){
+
+			$sql="UPDATE Vehicle SET veh_Image_1 = '$veh_Image_1' WHERE veh_ID = $vehID;";
 			$result = mysqli_query($conn,$sql);
 				echo "<script> alert('Vehicle Image Added Successfully'); </script>";
+			}
+
+			else {
+				echo "<script> alert('No image uploaded!'); </script>";
+				echo"<meta http-equiv='refresh' content='0; url=view_veh.php'/>";
+
+			}
+
+							
+		}
+
+			
 		
 	}
 
@@ -127,7 +159,7 @@ if(isset($_POST['submit']))
 	//	  echo"<meta http-equiv='refresh' content='0; url=add_veh.php'/>";
 	//}
 
-		}
+		
 
 	}
 
@@ -165,9 +197,9 @@ if(isset($_POST['submit']))
 
 		 <li>
 			<div class="label-block" style="white-space: nowrap;">
-				<label for="fuel_type" style="display: inline-block; font-size: 15px;">Fuel Type</label>
-           <input type="radio" name="fuel_type" value="Ron 95" style="display: inline-block;"> Ron 95</input>
-           <input type="radio" name="fuel_type" value="Ron 97"style="display: inline-block;"> Ron 97</input>
+				<label for="fuel_Type" style="display: inline-block; font-size: 15px;">Fuel Type</label>
+           <input type="radio" name="fuel_Type" value="Ron 95" style="display: inline-block;"> Ron 95</input>
+           <input type="radio" name="fuel_Type" value="Ron 97"style="display: inline-block;"> Ron 97</input>
 
            <li>
 

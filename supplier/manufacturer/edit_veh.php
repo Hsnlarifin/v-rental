@@ -20,6 +20,7 @@
 			$row = mysqli_fetch_array($result);
 			
 			if($_SERVER['REQUEST_METHOD'] == "POST") {
+
 				
 			$veh_Model = $_POST['veh_Model'];
 			$fuel_type = $_POST['fuel_type'];
@@ -32,6 +33,9 @@
 			//$folder = "images/".$veh_Image_1;
 			
 			//$image = addslashes(file_get_contents($veh_Image));
+
+			
+
 			
 
 			$qry = "UPDATE vehicle SET veh_Model='$veh_Model',fuel_type ='$fuel_type',veh_Colour='$veh_Colour',seating_Capacity = '$seating_Capacity',veh_Transmission = '$veh_Transmission',veh_plateNo = '$veh_plateNo'WHERE veh_ID='$veh_ID'";
@@ -89,7 +93,7 @@
 				<label for="FuelType">Fuel Type</label> 
 			</div>
 		
-			 <div class="input-box"> <input type="text" id="fuel_type" name="fuel_type" placeholder="Fuel Type" value="<?php echo $row['fuel_type']; ?>" required /> </div> 
+			 <div class="input-box"> <input type="text" id="fuel_type" name="fuel_type" placeholder="Fuel Type" value="<?php echo $row['fuel_Type']; ?>" required /> </div> 
 			</div> 
 		</li>
 

@@ -10,8 +10,8 @@ else{
 if(isset($_REQUEST['eid']))
 	{
 $eid=intval($_GET['eid']);
-$status="2";
-$sql = "UPDATE tblbooking SET Status=:status WHERE  id=:eid";
+$status="CANCELLED";
+$sql = "UPDATE reservation SET Status=:status WHERE  resv_ID=:eid";
 $query = $dbh->prepare($sql);
 $query -> bindParam(':status',$status, PDO::PARAM_STR);
 $query-> bindParam(':eid',$eid, PDO::PARAM_STR);
@@ -24,9 +24,9 @@ $msg="Booking Successfully Cancelled";
 if(isset($_REQUEST['aeid']))
 	{
 $aeid=intval($_GET['aeid']);
-$status=1;
+$status='CONFIRMED';
 
-$sql = "UPDATE tblbooking SET Status=:status WHERE  id=:aeid";
+$sql = "UPDATE reservation SET Status=:status WHERE resv_ID =:aeid";
 $query = $dbh->prepare($sql);
 $query -> bindParam(':status',$status, PDO::PARAM_STR);
 $query-> bindParam(':aeid',$aeid, PDO::PARAM_STR);
@@ -120,23 +120,17 @@ $msg="Booking Successfully Confirmed";
 											<th>Posting date</th>
 											<th>Action</th>
 										</tr>
-									</thead>
-									<tfoot>
-										<tr>
-										<th>#</th>
-										<th>Name</th>
-											<th>Vehicle</th>
-											<th>From Date</th>
-											<th>To Date</th>
-											<th>Message</th>
-											<th>Status</th>
-											<th>Posting date</th>
-											<th>Action</th>
-										</tr>
-									</tfoot>
+									</thead>									
 									<tbody>
 
-									<?php $sql = "SELECT tblusers.FullName,tblbrands.BrandName,tblvehicles.VehiclesTitle,tblbooking.FromDate,tblbooking.ToDate,tblbooking.message,tblbooking.VehicleId as vid,tblbooking.Status,tblbooking.PostingDate,tblbooking.id  from tblbooking join tblvehicles on tblvehicles.id=tblbooking.VehicleId join tblusers on tblusers.EmailId=tblbooking.userEmail join tblbrands on tblvehicles.VehiclesBrand=tblbrands.id  ";
+									<?php 
+												$sql = "SELECT customer.*, reservation.*, user.*, vehicle.*, brand.*
+												FROM customer
+												JOIN reservation ON customer.cust_ID = reservation.cust_ID
+												JOIN user ON customer.user_ID = user.user_ID
+												JOIN vehicle ON reservation.veh_ID = vehicle.veh_ID
+												JOIN brand ON vehicle.brand_ID = brand.brand_ID;";
+
 $query = $dbh -> prepare($sql);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
@@ -147,16 +141,16 @@ foreach($results as $result)
 {				?>	
 										<tr>
 											<td><?php echo htmlentities($cnt);?></td>
-											<td><?php echo htmlentities($result->FullName);?></td>
-											<td><a href="edit-vehicle.php?id=<?php echo htmlentities($result->vid);?>"><?php echo htmlentities($result->BrandName);?> , <?php echo htmlentities($result->VehiclesTitle);?></td>
-											<td><?php echo htmlentities($result->FromDate);?></td>
-											<td><?php echo htmlentities($result->ToDate);?></td>
+											<td><?php echo htmlentities($result->f_name);?></td>
+											<td><a href="edit-vehicle.php?id=<?php echo htmlentities($result->veh_ID);?>"><?php echo htmlentities($result->brand_Name);?> , <?php echo htmlentities($result->veh_Model);?></td>
+											<td><?php echo htmlentities($result->from_Date);?></td>
+											<td><?php echo htmlentities($result->to_Date);?></td>
 											<td><?php echo htmlentities($result->message);?></td>
 											<td><?php 
-if($result->Status==0)
+if($result->Status=='PENDING')
 {
 echo htmlentities('Not Confirmed yet');
-} else if ($result->Status==1) {
+} else if ($result->Status=='CONFIRMED') {
 echo htmlentities('Confirmed');
 }
  else{
@@ -164,10 +158,10 @@ echo htmlentities('Confirmed');
  }
 										?></td>
 											<td><?php echo htmlentities($result->PostingDate);?></td>
-										<td><a href="manage-bookings.php?aeid=<?php echo htmlentities($result->id);?>" onclick="return confirm('Do you really want to Confirm this booking')"> Confirm</a> /
+										<td><a href="manage-bookings.php?aeid=<?php echo htmlentities($result->resv_ID);?>" onclick="return confirm('Do you really want to Confirm this booking')"> Confirm</a> /
 
 
-<a href="manage-bookings.php?eid=<?php echo htmlentities($result->id);?>" onclick="return confirm('Do you really want to Cancel this Booking')"> Cancel</a>
+<a href="manage-bookings.php?eid=<?php echo htmlentities($result->resv_ID);?>" onclick="return confirm('Do you really want to Cancel this Booking')"> Cancel</a>
 </td>
 
 										</tr>
